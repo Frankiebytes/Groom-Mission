@@ -46,10 +46,10 @@
           <p>This is Winston from Overwatch Headquarters. I’m afraid we have a serious situation.</p>
           <p>The sinister geneticist Dr. Moira has targeted your groomsmen. Without their knowledge, she has infiltrated their minds and concealed a series of commands deep within their memories. We still don’t know what she intends to make them do—but if Moira is involved, we must assume the worst.</p>
           <p>A direct rescue attempt would be far too dangerous. One wrong move could alert her or activate whatever conditioning she has placed inside them. We must approach this operation carefully and methodically.</p>
-          <p>My reconnaissance team recovered fragments of encrypted intelligence, but the data is too dangerous to release all at once. We have divided it into four classified missions—each one protecting the preparation orders for a different stage of the operation.</p>
+          <p>My reconnaissance team can recover only small fragments of encrypted intelligence at a time. To make sense of them, we need someone who knows your groomsmen well enough to follow the clues.</p>
           <p style="color:var(--text)">That person is you.</p>
-          <p>Complete the missions in sequence. Mission One will reveal what you need for Friday. The next two missions will uncover your Saturday and Sunday orders. Mission Four will deliver one final set of instructions for the day of the operation.</p>
-          <p>Only the intelligence required for your current mission will be released. Trust your instincts, pay close attention, and tell no one what you discover.</p>
+          <p>Each mission will help us unlock another piece of the intelligence. We don’t have the full picture yet, but every fragment brings us closer to understanding Moira’s plan—and getting your team back.</p>
+          <p>We’ll contact you as more intelligence comes through. Until then, trust your instincts, pay close attention, and tell no one what you discover.</p>
           <p style="color:var(--text)">Raul, your team needs its hero.</p>
           <p class="directive">ACCESS DIRECTIVE: Your access phrase is your Overwatch username.</p>
         </div>
@@ -71,9 +71,9 @@
     <div class="progress"><span id="progress"></span></div>
     <div class="workspace">
       <nav class="stages" aria-label="Mission stages">
-        <button class="stage active" id="stage-one"><b>01</b><span>FRIDAY INTERCEPT</span></button>
-        <button class="stage" id="stage-two" disabled><b>⌕</b><span>SATURDAY // SEP 21</span></button>
-        <button class="stage" disabled><b>⌕</b><span>SUNDAY // PENDING</span></button>
+        <button class="stage active" id="stage-one"><b>01</b><span>ACTIVE INTERCEPT</span></button>
+        <button class="stage" id="stage-two" disabled><b>⌕</b><span>UNLOCKS SEP 21</span></button>
+        <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
         <button class="stage" disabled><b>⌕</b><span>FINAL DIRECTIVE</span></button>
       </nav>
 
@@ -81,11 +81,11 @@
         <div class="mission-head"><div><div class="eyebrow mint">STAGE 01 // LIVE COMMS</div><h1>Intercepted transmission</h1></div><div class="radio">⌁</div></div>
         <div id="dialogue"></div>
         <div class="phrase"><div class="eyebrow dim">NEURAL DISRUPTION PHRASE</div><blockquote>“You mean, she puts on airs?”</blockquote></div>
-        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WUYANG</div><p>Once Frankie gives you the code, bring it straight back here to unlock Friday’s orders. Capitalization doesn’t matter. Then leave the rest to us—preferably before Juno starts practicing her concentrating face again.</p></div></article>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WUYANG</div><p>Once Frankie responds, bring the code straight back here. Capitalization doesn’t matter. We’ll work through whatever we find next—together.</p></div></article>
         <form class="mission-form" id="code-form">
           <label for="mission-code">ENTER FRANKIE’S ACCESS CODE</label>
           <input id="mission-code" autocomplete="off" placeholder="Awaiting recovered code…" />
-          <div class="form-actions"><button class="action" type="submit">Decrypt Friday orders →</button><button class="hint-btn" type="button" id="hint-btn">Mission reminder</button></div>
+          <div class="form-actions"><button class="action" type="submit">Decrypt recovered file →</button><button class="hint-btn" type="button" id="hint-btn">Mission reminder</button></div>
           <p class="error hidden" id="code-error">ACCESS DENIED — Frankie’s transmission was not recognized.</p>
           <p class="dim hidden" id="hint-text">Contact Frankie and use the neural disruption phrase shown above.</p>
         </form>
@@ -93,10 +93,10 @@
 
       <section class="card mission hidden" id="equipment-file">
         <div class="mission-head"><div><div class="eyebrow mint">FILE 01 // DECRYPTED</div><h1>Friday preparation orders</h1></div><div class="radio">✓</div></div>
-        <article class="file-intro"><h2>Mission 01 scope</h2><p>This transmission contains Friday intelligence only. Saturday, Sunday, and the final operation-day directive remain encrypted behind the missions ahead.</p></article>
+        <article class="file-intro"><h2>Recovered fragment</h2><p>This is all we could recover for now. Follow these preparation orders and stay ready—we’ll need to keep going to uncover the rest.</p></article>
         <article class="equipment priority"><div class="dayline"><span>FRIDAY</span><span class="priority-label">IMMEDIATE EQUIPMENT PRIORITY</span></div><h2>Water-ready loadout</h2><ul><li>Dress comfortably in clothes you do not mind getting completely wet.</li><li>Pack swimwear and a full dry change of clothes.</li><li>Bring sandals and keep your water shoes immediately accessible—not buried in your luggage.</li><li>A towel and waterproof phone pouch are strongly recommended.</li></ul></article>
         <article class="critical"><div class="eyebrow mint">CRITICAL FRIDAY REMINDER</div><p>Your water shoes are essential. Have them ready before Friday’s operation begins.</p></article>
-        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re still uncovering the details of Mission Two. That transmission will contain your Saturday preparation orders, but it isn’t ready yet. Report back on <strong>Monday, September 21 at 07:00 AM CST</strong>.</p><p class="dim">And don’t be late! Leave the time travel to me.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div></div></article>
+        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re tracking down another piece of the puzzle. Still a few loose ends, so keep this channel handy and report back on <strong>Monday, September 21 at 07:00 AM CST</strong>.</p><p class="dim">And don’t be late! Leave the time travel to me.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div></div></article>
       </section>
     </div>
   </main>
@@ -108,57 +108,47 @@
   [
     "JUNO",
     "juno",
-    "Raul? This is Juno! Wuyang is here too. We intercepted a message about the weekend trip your groomsmen are planning. Moira intends to use it for an experiment. On your friends. That is… very much not what a celebration is for!"
+    "Raul! Juno here, with Wuyang. We intercepted a message—Moira is trying to use your bachelor party weekend for her plans. Your friends arranged a celebration, and she… how could she do this to them?"
   ],
   [
     "WUYANG",
     "wuyang",
-    "Definitely not one I would attend. We still don’t know whether she arranged the trip or slipped her plan into theirs. Either way, we need to get you ready without letting her know we’re onto her."
+    "Even for Moira, this is unsettling. We don’t know whether she influenced the plans or is taking advantage of them. Until we do, we have to be careful."
   ],
   [
     "JUNO",
     "juno",
-    "Please do not discuss the trip with your groomsmen! Moira has hidden trigger phrases in their conditioning. A question about where you are going could activate something. Or what you are doing. Ah—there are far too many ways to ask about a trip!"
+    "Please avoid discussing the trip with your groomsmen! Moira’s conditioning may respond to trigger phrases. Even an innocent question could activate something. Ah—I would very much prefer we do not find out what."
   ],
   [
     "WUYANG",
     "wuyang",
-    "Then we keep it simple: no trip questions. Act natural. You can manage that, Raul. Juno, perhaps stop looking as though we’ve already set off an alarm."
+    "You and me both. Keep things casual, Raul. We also learned that Moira put Sombra in charge of hiding the data. She scattered encrypted files behind her firewall, but our recon team caught a brief gap and copied one."
   ],
   [
     "JUNO",
     "juno",
-    "This is my concentrating face! …I will work on it. We also learned that Moira put Sombra in charge of hiding the trip data. She scattered the files across a protected network and encrypted each one separately."
+    "A small success! Except… the file still needs a password. We recovered something we cannot read. That counts as progress, yes?"
   ],
   [
     "WUYANG",
     "wuyang",
-    "Sombra covered the main entrance well. Fortunately, Winston’s recon team spotted a brief gap while her firewall was updating. We slipped through and copied one file before the gap closed. I’ll take a small opening over a locked front door."
+    "It counts. Small pieces are all we can retrieve right now. We’ll keep following them. This one points to Frankie—he has the code."
   ],
   [
     "JUNO",
     "juno",
-    "One file successfully recovered! It contains your preparation orders for Friday. But we only got the encrypted copy—the password is still required. So… a successful recovery of a thing we cannot yet read."
+    "A specific phrase should briefly disrupt Moira’s control and let him respond with it. Only for a few seconds! Please be ready to remember his answer."
   ],
   [
     "WUYANG",
     "wuyang",
-    "Progress counts, Juno. We found the file, and we found who has its password: Frankie. Saturday, Sunday, and the final instructions will have to wait for the next missions. One problem at a time."
+    "Be discreet. Say the phrase or send it by text. If you speak it, go slowly, loudly enough for him to hear, and clearly. We may only get one chance."
   ],
   [
     "JUNO",
     "juno",
-    "There is a way to reach him! A specific phrase will briefly disrupt Moira’s control, and Frankie should respond with the access code. The effect lasts only a few seconds. Please be ready to remember his answer!"
-  ],
-  [
-    "WUYANG",
-    "wuyang",
-    "Catch him discreetly. You can say the phrase or send it by text. If you say it, go slowly, loudly enough for him to hear, and clearly. We may only get one chance, so save the dramatic whisper for afterward."
-  ],
-  [
-    "JUNO",
-    "juno",
-    "Understood. No dramatic whispering. Raul, the phrase is:"
+    "We’re counting on you, Raul. Here is the phrase:"
   ]
 ];
     const dialogueRoot = document.getElementById("dialogue");
