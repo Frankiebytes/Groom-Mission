@@ -133,7 +133,7 @@
     }
     document.getElementById("auth-form").addEventListener("submit",event=>{
       event.preventDefault();
-      if(normalize(document.getElementById("access").value)!=="animalcookies"){document.getElementById("auth-error").classList.remove("hidden");return}
+      if(normalize(document.getElementById("access").value)!=="animalcookie"){document.getElementById("auth-error").classList.remove("hidden");return}
       login.classList.add("hidden");mission.classList.remove("hidden");
       if(localStorage.getItem("groom-mission-1-solved")==="true")showSolved();
       window.scrollTo(0,0);
