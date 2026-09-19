@@ -81,7 +81,7 @@
         <div class="mission-head"><div><div class="eyebrow mint">STAGE 01 // LIVE COMMS</div><h1>Intercepted transmission</h1></div><div class="radio">⌁</div></div>
         <div id="dialogue"></div>
         <div class="phrase"><div class="eyebrow dim">NEURAL DISRUPTION PHRASE</div><blockquote>“You mean, she puts on airs?”</blockquote></div>
-        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WUYANG</div><p>When Frankie responds, return here immediately and enter the access code exactly as you heard it. Capitalization will not matter.</p></div></article>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WUYANG</div><p>Once Frankie gives you the code, bring it straight back here to unlock Friday’s orders. Capitalization doesn’t matter. Then leave the rest to us—preferably before Juno starts practicing her concentrating face again.</p></div></article>
         <form class="mission-form" id="code-form">
           <label for="mission-code">ENTER FRANKIE’S ACCESS CODE</label>
           <input id="mission-code" autocomplete="off" placeholder="Awaiting recovered code…" />
@@ -105,17 +105,62 @@
     const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
     const unlockAt = new Date("2026-09-21T07:00:00-05:00").getTime();
     const dialogue = [
-      ["JUNO","juno","Raul! Juno here. We found out that Moira is planning to use a weekend trip your groomsmen have arranged for you to carry out her evil plans."],
-      ["WUYANG","wuyang","One question remains: did Moira scheme the entire trip herself, or is she taking advantage of plans they had already made?"],
-      ["JUNO","juno","Either possibility is terrible. What an evil person! We need to stop her before something catastrophic happens."],
-      ["WUYANG","wuyang","Which is why you must cease all conversation about the trip. Certain words may trigger a hidden command inside your groomsmen. Until we understand Moira’s conditioning, even an innocent question could be dangerous."],
-      ["JUNO","juno","Ah! Right—no questions about the destination, the schedule, or the activities. In fact, just pretend you are completely uninterested. Can you do that? Actually, do not answer that."],
-      ["WUYANG","wuyang","Our reconnaissance uncovered one protected fragment containing the preparation orders you will need for Friday. The remaining days are still sealed inside later missions."],
-      ["JUNO","juno","Only Friday? I was hoping we had cracked the whole weekend. Still, for someone called Sombra, she did not hide this fragment very well. We bypassed the firewall—but its contents are still sealed behind a password."],
-      ["WUYANG","wuyang","One step at a time, Juno. Releasing too much intelligence could alert Moira. Raul must complete each mission before the next stage of the plan can be revealed."],
-      ["JUNO","juno","Your groomsman Frankie has the access code. Moira’s control over him can be disrupted for only a few seconds, and only by a very specific phrase."],
-      ["WUYANG","wuyang","You may only get one chance. Be discreet. When Frankie can hear you, say the phrase slowly, loudly, and clearly:"]
-    ];
+  [
+    "JUNO",
+    "juno",
+    "Raul? This is Juno! Wuyang is here too. We intercepted a message about the weekend trip your groomsmen are planning. Moira intends to use it for an experiment. On your friends. That is… very much not what a celebration is for!"
+  ],
+  [
+    "WUYANG",
+    "wuyang",
+    "Definitely not one I would attend. We still don’t know whether she arranged the trip or slipped her plan into theirs. Either way, we need to get you ready without letting her know we’re onto her."
+  ],
+  [
+    "JUNO",
+    "juno",
+    "Please do not discuss the trip with your groomsmen! Moira has hidden trigger phrases in their conditioning. A question about where you are going could activate something. Or what you are doing. Ah—there are far too many ways to ask about a trip!"
+  ],
+  [
+    "WUYANG",
+    "wuyang",
+    "Then we keep it simple: no trip questions. Act natural. You can manage that, Raul. Juno, perhaps stop looking as though we’ve already set off an alarm."
+  ],
+  [
+    "JUNO",
+    "juno",
+    "This is my concentrating face! …I will work on it. We also learned that Moira put Sombra in charge of hiding the trip data. She scattered the files across a protected network and encrypted each one separately."
+  ],
+  [
+    "WUYANG",
+    "wuyang",
+    "Sombra covered the main entrance well. Fortunately, Winston’s recon team spotted a brief gap while her firewall was updating. We slipped through and copied one file before the gap closed. I’ll take a small opening over a locked front door."
+  ],
+  [
+    "JUNO",
+    "juno",
+    "One file successfully recovered! It contains your preparation orders for Friday. But we only got the encrypted copy—the password is still required. So… a successful recovery of a thing we cannot yet read."
+  ],
+  [
+    "WUYANG",
+    "wuyang",
+    "Progress counts, Juno. We found the file, and we found who has its password: Frankie. Saturday, Sunday, and the final instructions will have to wait for the next missions. One problem at a time."
+  ],
+  [
+    "JUNO",
+    "juno",
+    "There is a way to reach him! A specific phrase will briefly disrupt Moira’s control, and Frankie should respond with the access code. The effect lasts only a few seconds. Please be ready to remember his answer!"
+  ],
+  [
+    "WUYANG",
+    "wuyang",
+    "Catch him discreetly. You can say the phrase or send it by text. If you say it, go slowly, loudly enough for him to hear, and clearly. We may only get one chance, so save the dramatic whisper for afterward."
+  ],
+  [
+    "JUNO",
+    "juno",
+    "Understood. No dramatic whispering. Raul, the phrase is:"
+  ]
+];
     const dialogueRoot = document.getElementById("dialogue");
     dialogue.forEach(([speaker,tone,text]) => {
       const article=document.createElement("article");
