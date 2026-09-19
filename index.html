@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A classified preparation mission for one groom." />
+  <title>Groom Mission | Classified</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2305080b'/%3E%3Cpath d='M15 14h34v8H23v20h18V32H31v-7h18v25H15z' fill='%2362f5c5'/%3E%3C/svg%3E" />
+  <style>
+    :root{--bg:#05080b;--panel:#09120f;--panel2:#0b1714;--mint:#62f5c5;--text:#edf7f5;--muted:#a9bab6;--dim:#829692;--line:#223b34;--orange:#ffb347;--red:#ff8f7d}
+    *{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}.hidden{display:none!important}
+    button,input{font:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+    .scan{pointer-events:none;position:fixed;inset:0;z-index:50;opacity:.13;background:repeating-linear-gradient(to bottom,transparent 0,transparent 4px,rgba(98,245,197,.18) 5px);mix-blend-mode:screen}
+    .mono{font-family:"Courier New",monospace}.mint{color:var(--mint)}.red{color:var(--red)}.dim{color:var(--dim)}
+    .login{width:min(1180px,calc(100% - 40px));min-height:100vh;margin:auto;display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center;padding:64px 0}
+    .status{display:flex;gap:12px;align-items:center;color:var(--mint);font:14px "Courier New",monospace;letter-spacing:.18em;margin-bottom:24px}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(98,245,197,.6);animation:pulse 2s infinite}
+    @keyframes pulse{60%{box-shadow:0 0 0 9px rgba(98,245,197,0)}}
+    .eyebrow{font:14px "Courier New",monospace;letter-spacing:.14em}.login h1,.mission h1{font-size:clamp(42px,6vw,68px);line-height:.95;letter-spacing:-.045em;text-transform:uppercase;margin:14px 0 0}
+    .brief{border-left:1px solid #34564c;padding-left:28px;margin-top:28px;color:var(--muted);font-size:17px;line-height:1.65}.brief p{margin:16px 0}.brief .directive{border:1px solid #29473f;background:#07100e;padding:16px;color:var(--mint);font:14px "Courier New",monospace}
+    .card{border:1px solid var(--line);background:linear-gradient(135deg,rgba(98,245,197,.06),transparent 35%),var(--panel);box-shadow:16px 16px 0 #020405,16px 16px 0 1px #152620}.auth{padding:30px;position:sticky;top:40px}.auth .lock{font-size:34px;color:var(--mint);margin-bottom:26px}.auth label{display:block;font-size:24px;font-weight:800;text-transform:uppercase}.auth p{color:var(--dim);line-height:1.5}
+    input{width:100%;border:1px solid #29473f;background:#07100e;color:white;padding:16px 18px;font-size:18px;outline:none}input:focus{border-color:var(--mint)}.auth input{border-width:0 0 1px;padding-left:2px;margin-top:22px;font-family:"Courier New",monospace;letter-spacing:.16em}
+    .action{min-height:52px;border:1px solid var(--mint);background:var(--mint);color:#04110d;padding:12px 20px;font:700 14px "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.action:hover{background:#9affdc;transform:translate(-2px,-2px)}.auth .action{width:100%;margin-top:24px}.error{color:var(--red)!important;font:14px "Courier New",monospace}
+    header{border-bottom:1px solid #1b2c28;background:rgba(7,16,14,.94);padding:20px 40px;position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}header>div{max-width:1240px;margin:auto;display:flex;justify-content:space-between;gap:20px}.brand{font-weight:900;text-transform:uppercase}.clearance{font:12px "Courier New",monospace;letter-spacing:.14em;color:var(--dim)}
+    .progress{height:4px;background:#12231e}.progress span{display:block;height:100%;background:var(--mint);width:0;transition:.5s}
+    .workspace{width:min(1240px,calc(100% - 40px));margin:auto;display:grid;grid-template-columns:240px 1fr;gap:38px;padding:48px 0}.stages{display:flex;flex-direction:column;gap:9px}.stage{min-height:58px;display:flex;align-items:center;gap:14px;border:1px solid #1b2c28;background:#07100e;color:#52645f;padding:12px;font:13px "Courier New",monospace;letter-spacing:.08em;text-align:left}.stage b{display:grid;place-items:center;width:32px;height:32px;border:1px solid #29473f}.stage.active{border-color:var(--mint);color:var(--text);background:#0d1b17}.stage.solved{color:var(--mint)}.stage:disabled{opacity:.5}
+    .mission{padding:34px}.mission-head{display:flex;justify-content:space-between;gap:24px;border-bottom:1px solid #1f352f;padding-bottom:26px}.mission-head h1{font-size:clamp(34px,5vw,54px)}.radio{font-size:38px;color:var(--mint)}
+    .dialogue{display:grid;grid-template-columns:42px 1fr;gap:16px;border:1px solid #1f352f;background:#07100e;padding:16px;margin-top:14px}.dialogue.juno{border-left:3px solid #8cbcff}.dialogue.wuyang{border-left:3px solid var(--mint)}.avatar{display:grid;place-items:center;width:38px;height:38px;border:1px solid currentColor;font:700 16px "Courier New",monospace;color:var(--dim)}.speaker{font:700 12px "Courier New",monospace;letter-spacing:.16em}.juno .speaker{color:#8cbcff}.wuyang .speaker{color:var(--mint)}.dialogue p{margin:7px 0 0;color:#c4d2cf;line-height:1.6}
+    .phrase{border:1px solid rgba(255,143,125,.4);background:linear-gradient(90deg,rgba(255,143,125,.09),transparent);padding:20px;margin-top:22px}.phrase blockquote{margin:12px 0 0;font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.025em}.mission-form{border-top:1px solid #1f352f;margin-top:28px;padding-top:26px}.mission-form label{display:block;color:var(--mint);font:14px "Courier New",monospace;letter-spacing:.14em}.mission-form input{margin-top:14px}.form-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px}.hint-btn{border:0;background:none;color:var(--dim);padding:12px;cursor:pointer;text-decoration:underline}
+    .file-intro,.equipment,.critical,.tracer{border:1px solid var(--line);background:var(--panel2);padding:20px;margin-top:18px}.file-intro h2,.equipment h2{margin:0;text-transform:uppercase}.file-intro p,.equipment li{color:#c4d2cf;line-height:1.55}.equipment.priority{border-color:var(--mint);box-shadow:inset 3px 0 var(--mint);background:linear-gradient(135deg,rgba(98,245,197,.1),transparent 42%),var(--panel2)}.dayline{display:flex;justify-content:space-between;gap:12px;font:12px "Courier New",monospace;letter-spacing:.14em;color:var(--dim)}.priority-label{color:var(--red)}.equipment ul{padding:0;list-style:none}.equipment li{margin:10px 0;padding-left:25px;position:relative}.equipment li:before{content:"✓";position:absolute;left:0;color:var(--mint)}.critical{border-width:0 0 0 2px;border-color:var(--mint)}.tracer{border-color:#6f4d28;background:linear-gradient(135deg,rgba(255,179,71,.1),transparent 42%),#100d09}.tracer-grid{display:grid;grid-template-columns:42px 1fr;gap:16px}.tracer .avatar,.tracer .speaker,.countdown{color:var(--orange)}.tracer p{line-height:1.6}.countbox{border-top:1px solid #4a3823;margin-top:18px;padding-top:18px}.countdown{font:700 clamp(18px,3vw,26px) "Courier New",monospace;letter-spacing:.08em}
+    @media(max-width:850px){.login{grid-template-columns:1fr;padding:40px 0}.auth{position:static}.workspace{grid-template-columns:1fr}.stages{display:grid;grid-template-columns:repeat(4,1fr)}.stage{justify-content:center}.stage span{display:none}.mission{padding:24px}header{padding:18px 20px}}
+    @media(max-width:520px){.login,.workspace{width:min(100% - 28px,1180px)}.brief{padding-left:18px}.card{box-shadow:8px 8px 0 #020405,8px 8px 0 1px #152620}.mission{padding:18px}.dialogue{grid-template-columns:1fr}.dialogue .avatar{display:none}.tracer-grid{grid-template-columns:1fr}.tracer .avatar{display:none}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="scan" aria-hidden="true"></div>
+  <main id="login-screen">
+    <div class="login">
+      <section>
+        <div class="status"><span class="dot"></span>SECURE CHANNEL // ACTIVE</div>
+        <div class="eyebrow red">URGENT TRANSMISSION // YOU ARE NEEDED</div>
+        <h1>Mission <span class="mint">Briefing</span></h1>
+        <div class="brief">
+          <p class="eyebrow dim">FROM: WINSTON // OVERWATCH HQ<br>CLEARANCE: GROOM EYES ONLY</p>
+          <p style="color:var(--text)">Raul,</p>
+          <p>This is Winston from Overwatch Headquarters. I’m afraid we have a serious situation.</p>
+          <p>The sinister geneticist Dr. Moira has targeted your groomsmen. Without their knowledge, she has infiltrated their minds and concealed a series of commands deep within their memories. We still don’t know what she intends to make them do—but if Moira is involved, we must assume the worst.</p>
+          <p>A direct rescue attempt would be far too dangerous. One wrong move could alert her or activate whatever conditioning she has placed inside them. We must approach this operation carefully and methodically.</p>
+          <p>My reconnaissance team recovered fragments of encrypted intelligence. Moira protected the remaining data behind four classified missions that can only be completed by someone who knows the groomsmen better than anyone else.</p>
+          <p style="color:var(--text)">That person is you.</p>
+          <p>Complete each challenge to recover the intelligence, unlock your preparation orders, and move one step closer to rescuing your team. Trust your instincts, pay close attention, and tell no one what you discover.</p>
+          <p style="color:var(--text)">Raul, your team needs its hero.</p>
+          <p class="directive">ACCESS DIRECTIVE: Your access phrase is your Overwatch username.</p>
+        </div>
+      </section>
+      <form class="card auth" id="auth-form">
+        <div class="lock">▣</div>
+        <label for="access">Enter access phrase</label>
+        <p>Enter your Overwatch username. Capitalization does not matter.</p>
+        <input id="access" type="password" autocomplete="off" placeholder="•••••••••••••" />
+        <p class="error hidden" id="auth-error">Phrase rejected. Contact mission control.</p>
+        <button class="action" type="submit">Authenticate →</button>
+        <p class="eyebrow" style="font-size:12px;text-align:center;color:#52645f">NO SPOILERS BEYOND THIS POINT</p>
+      </form>
+    </div>
+  </main>
+
+  <main id="mission-screen" class="hidden">
+    <header><div><div class="brand">⬡ Groom Mission</div><div class="clearance" id="clearance">CLEARANCE 0/4</div></div></header>
+    <div class="progress"><span id="progress"></span></div>
+    <div class="workspace">
+      <nav class="stages" aria-label="Mission stages">
+        <button class="stage active" id="stage-one"><b>01</b><span>ACTIVE INTERCEPT</span></button>
+        <button class="stage" id="stage-two" disabled><b>⌕</b><span>UNLOCKS SEP 21</span></button>
+        <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
+        <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
+      </nav>
+
+      <section class="card mission" id="mission-one">
+        <div class="mission-head"><div><div class="eyebrow mint">STAGE 01 // LIVE COMMS</div><h1>Intercepted transmission</h1></div><div class="radio">⌁</div></div>
+        <div id="dialogue"></div>
+        <div class="phrase"><div class="eyebrow dim">NEURAL DISRUPTION PHRASE</div><blockquote>“You mean, she puts on airs?”</blockquote></div>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WUYANG</div><p>When Frankie responds, return here immediately and enter the access code exactly as you heard it. Capitalization will not matter.</p></div></article>
+        <form class="mission-form" id="code-form">
+          <label for="mission-code">ENTER FRANKIE’S ACCESS CODE</label>
+          <input id="mission-code" autocomplete="off" placeholder="Awaiting recovered code…" />
+          <div class="form-actions"><button class="action" type="submit">Decrypt equipment file →</button><button class="hint-btn" type="button" id="hint-btn">Mission reminder</button></div>
+          <p class="error hidden" id="code-error">ACCESS DENIED — Frankie’s transmission was not recognized.</p>
+          <p class="dim hidden" id="hint-text">Contact Frankie and use the neural disruption phrase shown above.</p>
+        </form>
+      </section>
+
+      <section class="card mission hidden" id="equipment-file">
+        <div class="mission-head"><div><div class="eyebrow mint">FILE 01 // DECRYPTED</div><h1>Essential equipment</h1></div><div class="radio">✓</div></div>
+        <article class="file-intro"><h2>Standard weekend loadout</h2><p>Bring your usual essentials for a full weekend away: toiletries, medications, phone charger, identification, and enough clothing for Friday through Sunday.</p></article>
+        <article class="equipment priority"><div class="dayline"><span>FRIDAY</span><span class="priority-label">PRIMARY EQUIPMENT PRIORITY</span></div><h2>Water-ready loadout</h2><ul><li>Dress comfortably in clothes you do not mind getting completely wet.</li><li>Pack swimwear and a dry change of clothes.</li><li>Bring sandals—but keep your water shoes handy throughout the entire trip.</li><li>A towel and waterproof phone pouch are strongly recommended.</li></ul></article>
+        <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sun protection: sunscreen, sunglasses, and a hat.</li><li>Use secure shoes with good grip; your water shoes may be useful again.</li></ul></article>
+        <article class="equipment"><div class="dayline"><span>SUNDAY</span></div><h2>Casual loadout</h2><ul><li>Comfortable casual clothing is all that is required.</li></ul></article>
+        <article class="critical"><div class="eyebrow mint">CRITICAL REMINDER</div><p>Keep your water shoes accessible for the entire weekend. Do not bury them at the bottom of your luggage.</p></article>
+        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re still uncovering the details of your next mission. The transmission isn’t ready yet, so report back on <strong>Monday, September 21 at 07:00 AM CST</strong>.</p><p class="dim">And don’t be late! Leave the time travel to me.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div></div></article>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
+    const unlockAt = new Date("2026-09-21T07:00:00-05:00").getTime();
+    const dialogue = [
+      ["JUNO","juno","Raul! Juno here. We found out that Moira is planning to use a weekend trip your groomsmen have arranged for you to carry out her evil plans."],
+      ["WUYANG","wuyang","One question remains: did Moira scheme the entire trip herself, or is she taking advantage of plans they had already made?"],
+      ["JUNO","juno","Either possibility is terrible. What an evil person! We need to stop her before something catastrophic happens."],
+      ["WUYANG","wuyang","Which is why you must cease all conversation about the trip. Certain words may trigger a hidden command inside your groomsmen. Until we understand Moira’s conditioning, even an innocent question could be dangerous."],
+      ["JUNO","juno","Ah! Right—no questions about the destination, the schedule, or the activities. In fact, just pretend you are completely uninterested. Can you do that? Actually, do not answer that."],
+      ["WUYANG","wuyang","Our reconnaissance uncovered a protected file containing the equipment you will need. Moira appears to have placed Sombra in charge of the firewall."],
+      ["JUNO","juno","For someone called Sombra, she did not hide it very well. We bypassed the firewall—but the contents are still sealed behind a password."],
+      ["WUYANG","wuyang","Your groomsman Frankie has the access code. Moira’s control over him can be disrupted for only a few seconds, and only by a very specific phrase."],
+      ["JUNO","juno","You may only get one chance. Be discreet. When Frankie can hear you, say the phrase slowly, loudly, and clearly:"]
+    ];
+    const dialogueRoot = document.getElementById("dialogue");
+    dialogue.forEach(([speaker,tone,text]) => {
+      const article=document.createElement("article");
+      article.className="dialogue "+tone;
+      article.innerHTML='<div class="avatar">'+speaker[0]+'</div><div><div class="speaker">'+speaker+'</div><p>'+text+'</p></div>';
+      dialogueRoot.appendChild(article);
+    });
+    const login=document.getElementById("login-screen"), mission=document.getElementById("mission-screen");
+    const missionOne=document.getElementById("mission-one"), equipment=document.getElementById("equipment-file");
+    function showSolved(){
+      missionOne.classList.add("hidden");equipment.classList.remove("hidden");
+      document.getElementById("clearance").textContent="CLEARANCE 1/4";
+      document.getElementById("progress").style.width="25%";
+      const stage=document.getElementById("stage-one");stage.classList.add("solved");stage.querySelector("b").textContent="✓";
+    }
+    document.getElementById("auth-form").addEventListener("submit",event=>{
+      event.preventDefault();
+      if(normalize(document.getElementById("access").value)!=="animalcookies"){document.getElementById("auth-error").classList.remove("hidden");return}
+      login.classList.add("hidden");mission.classList.remove("hidden");
+      if(localStorage.getItem("groom-mission-1-solved")==="true")showSolved();
+      window.scrollTo(0,0);
+    });
+    document.getElementById("code-form").addEventListener("submit",event=>{
+      event.preventDefault();
+      if(normalize(document.getElementById("mission-code").value)!=="spongebob"){document.getElementById("code-error").classList.remove("hidden");return}
+      localStorage.setItem("groom-mission-1-solved","true");showSolved();window.scrollTo(0,0);
+    });
+    document.getElementById("hint-btn").addEventListener("click",()=>document.getElementById("hint-text").classList.toggle("hidden"));
+    function updateCountdown(){
+      const remaining=unlockAt-Date.now(), root=document.getElementById("countdown"), status=document.getElementById("mission-two-status"), stage=document.getElementById("stage-two");
+      if(remaining<=0){root.textContent="TRANSMISSION WINDOW OPEN";status.textContent="WINDOW OPEN";stage.disabled=false;stage.querySelector("b").textContent="02";stage.querySelector("span").textContent="WINDOW OPEN";return}
+      const seconds=Math.floor(remaining/1000),d=Math.floor(seconds/86400),h=Math.floor((seconds%86400)/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;
+      root.textContent=[d,h,m,s].map(v=>String(v).padStart(2,"0")).join(" : ").replace(/^([^:]+):([^:]+):([^:]+):([^:]+)$/,"$1D :$2H :$3M :$4S");
+    }
+    updateCountdown();setInterval(updateCountdown,1000);
+  </script>
+</body>
+</html>
