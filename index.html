@@ -46,9 +46,10 @@
           <p>This is Winston from Overwatch Headquarters. I’m afraid we have a serious situation.</p>
           <p>The sinister geneticist Dr. Moira has targeted your groomsmen. Without their knowledge, she has infiltrated their minds and concealed a series of commands deep within their memories. We still don’t know what she intends to make them do—but if Moira is involved, we must assume the worst.</p>
           <p>A direct rescue attempt would be far too dangerous. One wrong move could alert her or activate whatever conditioning she has placed inside them. We must approach this operation carefully and methodically.</p>
-          <p>My reconnaissance team recovered fragments of encrypted intelligence. Moira protected the remaining data behind four classified missions that can only be completed by someone who knows the groomsmen better than anyone else.</p>
+          <p>My reconnaissance team recovered fragments of encrypted intelligence, but the data is too dangerous to release all at once. We have divided it into four classified missions—each one protecting the preparation orders for a different stage of the operation.</p>
           <p style="color:var(--text)">That person is you.</p>
-          <p>Complete each challenge to recover the intelligence, unlock your preparation orders, and move one step closer to rescuing your team. Trust your instincts, pay close attention, and tell no one what you discover.</p>
+          <p>Complete the missions in sequence. Mission One will reveal what you need for Friday. The next two missions will uncover your Saturday and Sunday orders. Mission Four will deliver one final set of instructions for the day of the operation.</p>
+          <p>Only the intelligence required for your current mission will be released. Trust your instincts, pay close attention, and tell no one what you discover.</p>
           <p style="color:var(--text)">Raul, your team needs its hero.</p>
           <p class="directive">ACCESS DIRECTIVE: Your access phrase is your Overwatch username.</p>
         </div>
@@ -70,10 +71,10 @@
     <div class="progress"><span id="progress"></span></div>
     <div class="workspace">
       <nav class="stages" aria-label="Mission stages">
-        <button class="stage active" id="stage-one"><b>01</b><span>ACTIVE INTERCEPT</span></button>
-        <button class="stage" id="stage-two" disabled><b>⌕</b><span>UNLOCKS SEP 21</span></button>
-        <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
-        <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
+        <button class="stage active" id="stage-one"><b>01</b><span>FRIDAY INTERCEPT</span></button>
+        <button class="stage" id="stage-two" disabled><b>⌕</b><span>SATURDAY // SEP 21</span></button>
+        <button class="stage" disabled><b>⌕</b><span>SUNDAY // PENDING</span></button>
+        <button class="stage" disabled><b>⌕</b><span>FINAL DIRECTIVE</span></button>
       </nav>
 
       <section class="card mission" id="mission-one">
@@ -84,20 +85,18 @@
         <form class="mission-form" id="code-form">
           <label for="mission-code">ENTER FRANKIE’S ACCESS CODE</label>
           <input id="mission-code" autocomplete="off" placeholder="Awaiting recovered code…" />
-          <div class="form-actions"><button class="action" type="submit">Decrypt equipment file →</button><button class="hint-btn" type="button" id="hint-btn">Mission reminder</button></div>
+          <div class="form-actions"><button class="action" type="submit">Decrypt Friday orders →</button><button class="hint-btn" type="button" id="hint-btn">Mission reminder</button></div>
           <p class="error hidden" id="code-error">ACCESS DENIED — Frankie’s transmission was not recognized.</p>
           <p class="dim hidden" id="hint-text">Contact Frankie and use the neural disruption phrase shown above.</p>
         </form>
       </section>
 
       <section class="card mission hidden" id="equipment-file">
-        <div class="mission-head"><div><div class="eyebrow mint">FILE 01 // DECRYPTED</div><h1>Essential equipment</h1></div><div class="radio">✓</div></div>
-        <article class="file-intro"><h2>Standard weekend loadout</h2><p>Bring your usual essentials for a full weekend away: toiletries, medications, phone charger, identification, and enough clothing for Friday through Sunday.</p></article>
-        <article class="equipment priority"><div class="dayline"><span>FRIDAY</span><span class="priority-label">PRIMARY EQUIPMENT PRIORITY</span></div><h2>Water-ready loadout</h2><ul><li>Dress comfortably in clothes you do not mind getting completely wet.</li><li>Pack swimwear and a dry change of clothes.</li><li>Bring sandals—but keep your water shoes handy throughout the entire trip.</li><li>A towel and waterproof phone pouch are strongly recommended.</li></ul></article>
-        <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sun protection: sunscreen, sunglasses, and a hat.</li><li>Use secure shoes with good grip; your water shoes may be useful again.</li></ul></article>
-        <article class="equipment"><div class="dayline"><span>SUNDAY</span></div><h2>Casual loadout</h2><ul><li>Comfortable casual clothing is all that is required.</li></ul></article>
-        <article class="critical"><div class="eyebrow mint">CRITICAL REMINDER</div><p>Keep your water shoes accessible for the entire weekend. Do not bury them at the bottom of your luggage.</p></article>
-        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re still uncovering the details of your next mission. The transmission isn’t ready yet, so report back on <strong>Monday, September 21 at 07:00 AM CST</strong>.</p><p class="dim">And don’t be late! Leave the time travel to me.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div></div></article>
+        <div class="mission-head"><div><div class="eyebrow mint">FILE 01 // DECRYPTED</div><h1>Friday preparation orders</h1></div><div class="radio">✓</div></div>
+        <article class="file-intro"><h2>Mission 01 scope</h2><p>This transmission contains Friday intelligence only. Saturday, Sunday, and the final operation-day directive remain encrypted behind the missions ahead.</p></article>
+        <article class="equipment priority"><div class="dayline"><span>FRIDAY</span><span class="priority-label">IMMEDIATE EQUIPMENT PRIORITY</span></div><h2>Water-ready loadout</h2><ul><li>Dress comfortably in clothes you do not mind getting completely wet.</li><li>Pack swimwear and a full dry change of clothes.</li><li>Bring sandals and keep your water shoes immediately accessible—not buried in your luggage.</li><li>A towel and waterproof phone pouch are strongly recommended.</li></ul></article>
+        <article class="critical"><div class="eyebrow mint">CRITICAL FRIDAY REMINDER</div><p>Your water shoes are essential. Have them ready before Friday’s operation begins.</p></article>
+        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re still uncovering the details of Mission Two. That transmission will contain your Saturday preparation orders, but it isn’t ready yet. Report back on <strong>Monday, September 21 at 07:00 AM CST</strong>.</p><p class="dim">And don’t be late! Leave the time travel to me.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div></div></article>
       </section>
     </div>
   </main>
@@ -111,10 +110,11 @@
       ["JUNO","juno","Either possibility is terrible. What an evil person! We need to stop her before something catastrophic happens."],
       ["WUYANG","wuyang","Which is why you must cease all conversation about the trip. Certain words may trigger a hidden command inside your groomsmen. Until we understand Moira’s conditioning, even an innocent question could be dangerous."],
       ["JUNO","juno","Ah! Right—no questions about the destination, the schedule, or the activities. In fact, just pretend you are completely uninterested. Can you do that? Actually, do not answer that."],
-      ["WUYANG","wuyang","Our reconnaissance uncovered a protected file containing the equipment you will need. Moira appears to have placed Sombra in charge of the firewall."],
-      ["JUNO","juno","For someone called Sombra, she did not hide it very well. We bypassed the firewall—but the contents are still sealed behind a password."],
-      ["WUYANG","wuyang","Your groomsman Frankie has the access code. Moira’s control over him can be disrupted for only a few seconds, and only by a very specific phrase."],
-      ["JUNO","juno","You may only get one chance. Be discreet. When Frankie can hear you, say the phrase slowly, loudly, and clearly:"]
+      ["WUYANG","wuyang","Our reconnaissance uncovered one protected fragment containing the preparation orders you will need for Friday. The remaining days are still sealed inside later missions."],
+      ["JUNO","juno","Only Friday? I was hoping we had cracked the whole weekend. Still, for someone called Sombra, she did not hide this fragment very well. We bypassed the firewall—but its contents are still sealed behind a password."],
+      ["WUYANG","wuyang","One step at a time, Juno. Releasing too much intelligence could alert Moira. Raul must complete each mission before the next stage of the plan can be revealed."],
+      ["JUNO","juno","Your groomsman Frankie has the access code. Moira’s control over him can be disrupted for only a few seconds, and only by a very specific phrase."],
+      ["WUYANG","wuyang","You may only get one chance. Be discreet. When Frankie can hear you, say the phrase slowly, loudly, and clearly:"]
     ];
     const dialogueRoot = document.getElementById("dialogue");
     dialogue.forEach(([speaker,tone,text]) => {
