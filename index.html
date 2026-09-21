@@ -125,7 +125,6 @@
         <div class="mission-head" style="margin-top:28px"><div><div class="eyebrow mint">FILE 02 // DECRYPTED</div><h1>Saturday preparation orders</h1></div><div class="radio">✓</div></div>
         <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sunscreen, sunglasses, and a hat.</li><li>Pack secure shoes with good grip. Keep your water shoes handy.</li></ul></article>
         <article class="tracer" id="lucio-update" style="border-color:#b0f34b;background:linear-gradient(135deg,rgba(176,243,75,.12),transparent 65%),#101709"><div class="tracer-grid"><div class="avatar" style="color:#b0f34b">L</div><div><div class="speaker" style="color:#b0f34b">LÚCIO // NEXT MISSION UPDATE</div><h2 style="color:#b0f34b">We’re making great progress!</h2><p>Yo, Raul! You and Michael were in sync! Another fragment secured—that’s what happens when you show up for your people.</p><p>We’re getting closer, but the team’s still working on the next signal. Your next mission will be available <strong>Wednesday, September 23 at 7:00 AM Central Time</strong>. Report back here, ready to keep this moving!</p><p>Until then, take a breather and keep it quiet. We’ll turn up the volume when your friends are safe.</p></div></div><div class="countbox" style="border-color:#40562a"><div class="eyebrow" style="color:#b0f34b">◷ MISSION 03 // <span id="mission-three-status">LOCKED</span></div><p><strong>Wednesday, September 23 · 7:00 AM Central</strong></p><div class="countdown" id="mission-three-countdown" style="color:#b0f34b"></div></div></article>
-        <button class="hint-btn" id="replay-escort">Revisit the memory escort</button>
       </section>
     </div>
   </main>
@@ -298,10 +297,6 @@
       document.getElementById("stage-two").classList.remove("active");
       (localStorage.getItem("groom-mission-1-solved")==="true"?equipment:missionOne).classList.remove("hidden");
       updateClearance();window.scrollTo(0,0);
-    });
-    document.getElementById("replay-escort").addEventListener("click",()=>{
-      checkpoint=0;coachReady=false;localStorage.setItem("groom-escort-checkpoint","0");
-      openEscort();startEscort();
     });
 
     function updateNextTransmission(){
