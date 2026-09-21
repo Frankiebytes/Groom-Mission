@@ -96,7 +96,7 @@
         <article class="file-intro"><h2>Recovered fragment</h2><p>This is all we could recover for now. Follow these preparation orders and stay ready—we’ll need to keep going to uncover the rest.</p></article>
         <article class="equipment priority"><div class="dayline"><span>FRIDAY</span><span class="priority-label">IMMEDIATE EQUIPMENT PRIORITY</span></div><h2>Water-ready loadout</h2><ul><li>Dress comfortably in clothes you do not mind getting completely wet.</li><li>Pack swimwear and a full dry change of clothes.</li><li>Bring sandals and keep your water shoes immediately accessible—not buried in your luggage.</li><li>A towel and waterproof phone pouch are strongly recommended.</li></ul></article>
         <article class="critical"><div class="eyebrow mint">CRITICAL FRIDAY REMINDER</div><p>Your water shoes are essential. Have them ready before Friday’s operation begins.</p></article>
-        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’ve picked up another signal. Michael O. may be able to help us recover it. Your next mission is ready.</p><p class="dim">Stay close to your teammate. We’ll explain on the next channel.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div><button class="action" id="open-escort" style="margin-top:18px">Open Mission 02 →</button></div></article>
+        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re still tracking down the next signal. Report back on <strong>Monday, September 21 at exactly 7:00 AM Central Time</strong>. Your next mission will be available then!</p><p class="dim">Stay close to your teammate. We’ll explain on the next channel.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div><button class="action" id="open-escort" style="margin-top:18px">Open Mission 02 →</button></div></article>
       </section>
 
       <section class="card mission hidden" id="mission-two">
@@ -132,7 +132,7 @@
 
   <script>
     const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
-    const unlockAt = 0; // Mission Two released for the playable escort.
+    const unlockAt = new Date("2026-09-21T07:00:00-05:00").getTime(); // 7 AM America/Chicago (daylight time).
     const dialogue = [
   [
     "JUNO",
@@ -210,6 +210,10 @@
     document.getElementById("hint-btn").addEventListener("click",()=>document.getElementById("hint-text").classList.toggle("hidden"));
     function updateCountdown(){
       const remaining=unlockAt-Date.now(), root=document.getElementById("countdown"), status=document.getElementById("mission-two-status"), stage=document.getElementById("stage-two");
+      const entry=document.getElementById("open-escort");
+      entry.disabled=remaining>0 || localStorage.getItem("groom-mission-1-solved")!=="true";
+      entry.classList.toggle("hidden",remaining>0);
+      if(remaining>0){stage.disabled=true;stage.querySelector("b").textContent="⌕";stage.querySelector("span").textContent="UNLOCKS SEP 21";status.textContent="LOCKED";}
       if(remaining<=0){root.textContent="MEMORY ESCORT READY";status.textContent="AVAILABLE";stage.disabled=localStorage.getItem("groom-mission-1-solved")!=="true";stage.querySelector("b").textContent="02";stage.querySelector("span").textContent=stage.disabled?"AWAITING CLEARANCE":"MEMORY ESCORT";return}
       const seconds=Math.floor(remaining/1000),d=Math.floor(seconds/86400),h=Math.floor((seconds%86400)/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;
       root.textContent=[d,h,m,s].map(v=>String(v).padStart(2,"0")).join(" : ").replace(/^([^:]+):([^:]+):([^:]+):([^:]+)$/,"$1D :$2H :$3M :$4S");
@@ -231,7 +235,7 @@
       document.getElementById("stage-two").classList.toggle("solved",done);
     }
     function openEscort(){
-      if(localStorage.getItem("groom-mission-1-solved")!=="true")return;
+      if(Date.now()<unlockAt || localStorage.getItem("groom-mission-1-solved")!=="true")return;
       hideMissionPanels();
       document.getElementById("stage-one").classList.remove("active");
       document.getElementById("stage-two").classList.add("active");
@@ -244,6 +248,7 @@
       window.scrollTo(0,0);
     }
     function startEscort(){
+      if(Date.now()<unlockAt)return;
       document.getElementById("escort-brief").classList.add("hidden");
       document.getElementById("escort-play").classList.remove("hidden");
       renderCheckpoint();
@@ -274,7 +279,7 @@
     }
     document.getElementById("memory-form").addEventListener("submit",event=>{
       event.preventDefault();
-      if(checkpoint===1&&!coachReady)return;
+      if(Date.now()<unlockAt || (checkpoint===1&&!coachReady))return;
       if(!acceptsMemory(checkpoint,document.getElementById("memory-answer").value)){
         document.getElementById("memory-error").classList.remove("hidden");return;
       }
