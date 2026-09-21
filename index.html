@@ -221,7 +221,7 @@
     function hideMissionPanels(){
       ["mission-one","equipment-file","mission-two","saturday-file"].forEach(id=>document.getElementById(id).classList.add("hidden"));
     }
-    let checkpoint=Math.max(0,Math.min(3,Number(localStorage.getItem("groom-escort-checkpoint"))||0));
+    let checkpoint=localStorage.getItem("groom-mission-2-solved")==="true" ? 3 : Math.max(0,Math.min(3,Number(localStorage.getItem("groom-escort-checkpoint"))||0));
     let coachReady=false;
     function acceptsMemory(index,value){
       const clean=normalize(value);
@@ -234,6 +234,7 @@
       document.getElementById("stage-two").classList.toggle("solved",done);
     }
     function openEscort(){
+      if(localStorage.getItem("groom-mission-2-solved")==="true")checkpoint=3;
       if(Date.now()<unlockAt || localStorage.getItem("groom-mission-1-solved")!=="true")return;
       hideMissionPanels();
       document.getElementById("stage-one").classList.remove("active");
