@@ -124,7 +124,7 @@
         <div class="abort" role="alert"><div class="eyebrow">TRACER // EMERGENCY DISCONNECT</div><h1>ABORT CONTACT!</h1><p><strong>End the call or conversation with Michael immediately.</strong></p><p>We have the final fragment. Cease communication now, before Moira detects the connection. Do not ask him any more questions about the mission.</p></div>
         <div class="mission-head" style="margin-top:28px"><div><div class="eyebrow mint">FILE 02 // DECRYPTED</div><h1>Saturday preparation orders</h1></div><div class="radio">✓</div></div>
         <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sunscreen, sunglasses, and a hat.</li><li>Pack secure shoes with good grip. Keep your water shoes handy.</li></ul></article>
-        <article class="file-intro" style="border-color:#b0f34b;background:linear-gradient(135deg,rgba(176,243,75,.10),transparent 65%),var(--panel2)"><div class="tracer-grid"><div class="avatar" style="color:#b0f34b">L</div><div><div class="speaker" style="color:#b0f34b">LÚCIO // SECURE FREQUENCY</div><p>Yo, Raul! Lúcio here. Three checkpoints, another fragment recovered—you and Michael were in sync! That’s what happens when you show up for your people.</p><p>We’re making serious progress. Moira’s still got secrets, but we’re getting closer, one piece at a time. Take a breather and let the team work on the next signal.</p><p>Your next mission will be available <strong>Wednesday, September 23 at 7:00 AM Central Time</strong>. Be back on this channel, ready to go!</p><p>Until then, keep it quiet. We’ll turn up the volume when your friends are safe.</p></div></div><div class="countbox" style="border-color:#40562a"><div class="eyebrow mint">MISSION 03 // NEXT TRANSMISSION</div><p style="margin-bottom:0">Wednesday, September 23 · 7:00 AM Central</p></div></article>
+        <article class="tracer" id="lucio-update" style="border-color:#b0f34b;background:linear-gradient(135deg,rgba(176,243,75,.12),transparent 65%),#101709"><div class="tracer-grid"><div class="avatar" style="color:#b0f34b">L</div><div><div class="speaker" style="color:#b0f34b">LÚCIO // NEXT MISSION UPDATE</div><h2 style="color:#b0f34b">We’re making great progress!</h2><p>Yo, Raul! You and Michael were in sync! Another fragment secured—that’s what happens when you show up for your people.</p><p>We’re getting closer, but the team’s still working on the next signal. Your next mission will be available <strong>Wednesday, September 23 at 7:00 AM Central Time</strong>. Report back here, ready to keep this moving!</p><p>Until then, take a breather and keep it quiet. We’ll turn up the volume when your friends are safe.</p></div></div><div class="countbox" style="border-color:#40562a"><div class="eyebrow" style="color:#b0f34b">◷ MISSION 03 // <span id="mission-three-status">LOCKED</span></div><p><strong>Wednesday, September 23 · 7:00 AM Central</strong></p><div class="countdown" id="mission-three-countdown" style="color:#b0f34b"></div></div></article>
         <button class="hint-btn" id="replay-escort">Revisit the memory escort</button>
       </section>
     </div>
@@ -299,6 +299,14 @@
       openEscort();startEscort();
     });
 
+    function updateNextTransmission(){
+      const remaining=new Date("2026-09-23T07:00:00-05:00").getTime()-Date.now();
+      const root=document.getElementById("mission-three-countdown");
+      if(remaining<=0){root.textContent="REPORT BACK TO MISSION CONTROL";document.getElementById("mission-three-status").textContent="TRANSMISSION WINDOW OPEN";return;}
+      const seconds=Math.floor(remaining/1000);
+      root.textContent=Math.floor(seconds/86400)+"D : "+String(Math.floor(seconds%86400/3600)).padStart(2,"0")+"H : "+String(Math.floor(seconds%3600/60)).padStart(2,"0")+"M : "+String(seconds%60).padStart(2,"0")+"S";
+    }
+    updateNextTransmission();setInterval(updateNextTransmission,1000);
     updateCountdown();setInterval(updateCountdown,1000);
   </script>
 </body>
