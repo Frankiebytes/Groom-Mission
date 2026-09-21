@@ -30,7 +30,7 @@
     @media(max-width:850px){.login{grid-template-columns:1fr;padding:40px 0}.auth{position:static}.workspace{grid-template-columns:1fr}.stages{display:grid;grid-template-columns:repeat(4,1fr)}.stage{justify-content:center}.stage span{display:none}.mission{padding:24px}header{padding:18px 20px}}
     @media(max-width:520px){.login,.workspace{width:min(100% - 28px,1180px)}.brief{padding-left:18px}.card{box-shadow:8px 8px 0 #020405,8px 8px 0 1px #152620}.mission{padding:18px}.dialogue{grid-template-columns:1fr}.dialogue .avatar{display:none}.tracer-grid{grid-template-columns:1fr}.tracer .avatar{display:none}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  </style>
+  .payload{margin:32px 0}.payload-track{height:12px;background:#223b34;position:relative;border-radius:8px}.payload-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .6s}.payload-track b{position:absolute;top:-12px;left:0;font-size:30px;color:var(--mint);transition:left .6s;transform:translateX(-50%)}.payload-labels{display:flex;justify-content:space-between;margin-top:16px;color:var(--dim);font-family:monospace}.abort{border:2px solid var(--red);background:#2b1010;padding:24px}.abort h1{color:var(--red);font-size:clamp(32px,6vw,56px);margin:20px 0}.abort p{line-height:1.6}.memory-copy p{line-height:1.65;color:#c4d2cf}.memory-copy h2{font-size:28px}details{margin-top:20px;color:var(--dim)}summary{cursor:pointer}.stage:not(:disabled){cursor:pointer}</style>
 </head>
 <body>
   <div class="scan" aria-hidden="true"></div>
@@ -72,7 +72,7 @@
     <div class="workspace">
       <nav class="stages" aria-label="Mission stages">
         <button class="stage active" id="stage-one"><b>01</b><span>ACTIVE INTERCEPT</span></button>
-        <button class="stage" id="stage-two" disabled><b>⌕</b><span>UNLOCKS SEP 21</span></button>
+        <button class="stage" id="stage-two" disabled><b>⌕</b><span>AWAITING CLEARANCE</span></button>
         <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
         <button class="stage" disabled><b>⌕</b><span>FINAL DIRECTIVE</span></button>
       </nav>
@@ -96,14 +96,43 @@
         <article class="file-intro"><h2>Recovered fragment</h2><p>This is all we could recover for now. Follow these preparation orders and stay ready—we’ll need to keep going to uncover the rest.</p></article>
         <article class="equipment priority"><div class="dayline"><span>FRIDAY</span><span class="priority-label">IMMEDIATE EQUIPMENT PRIORITY</span></div><h2>Water-ready loadout</h2><ul><li>Dress comfortably in clothes you do not mind getting completely wet.</li><li>Pack swimwear and a full dry change of clothes.</li><li>Bring sandals and keep your water shoes immediately accessible—not buried in your luggage.</li><li>A towel and waterproof phone pouch are strongly recommended.</li></ul></article>
         <article class="critical"><div class="eyebrow mint">CRITICAL FRIDAY REMINDER</div><p>Your water shoes are essential. Have them ready before Friday’s operation begins.</p></article>
-        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’re tracking down another piece of the puzzle. Still a few loose ends, so keep this channel handy and report back on <strong>Monday, September 21 at 07:00 AM CST</strong>.</p><p class="dim">And don’t be late! Leave the time travel to me.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div></div></article>
+        <article class="tracer"><div class="tracer-grid"><div class="avatar">T</div><div><div class="speaker">TRACER // TEMPORAL CHANNEL</div><p>Tracer here! We’ve picked up another signal. Michael O. may be able to help us recover it. Your next mission is ready.</p><p class="dim">Stay close to your teammate. We’ll explain on the next channel.</p></div></div><div class="countbox"><div class="eyebrow dim">◷ MISSION 02 // <span id="mission-two-status">LOCKED</span></div><div class="countdown" id="countdown"></div><button class="action" id="open-escort" style="margin-top:18px">Open Mission 02 →</button></div></article>
+      </section>
+
+      <section class="card mission hidden" id="mission-two">
+        <div class="mission-head"><div><div class="eyebrow mint">STAGE 02 // MEMORY ESCORT</div><h1>Stay on the objective</h1></div><div class="radio">⌁</div></div>
+        <div id="escort-brief">
+          <article class="dialogue juno"><div class="avatar">T</div><div><div class="speaker">TRACER</div><p>Raul! We’ve picked up another signal, and it’s coming from Michael O. Looks like some of your shared memories are putting up a fight against Moira’s conditioning.</p></div></article>
+          <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON</div><p>Familiar experiences may help him regain control long enough to recover more intelligence. Contact Michael in person or by phone. Talk through the memories together, and follow his cues.</p></div></article>
+          <article class="dialogue juno"><div class="avatar">T</div><div><div class="speaker">TRACER</div><p>Think of it as escorting a payload. Three checkpoints. Stick with your teammate, keep the conversation moving, and don’t rush him! The details you remember could be exactly what we need.</p></div></article>
+          <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON</div><p>Keep the operation discreet. Once the final fragment is recovered, end the conversation immediately. A prolonged connection could alert Moira.</p></div></article>
+          <button class="action" id="begin-escort" style="margin-top:24px">Begin escort →</button>
+        </div>
+        <div id="escort-play" class="hidden">
+          <div class="payload" aria-label="Payload progress"><div class="payload-track"><span id="payload-fill"></span><b id="payload-cart">⬡</b></div><div class="payload-labels"><span>01</span><span>02</span><span>03</span></div></div>
+          <p class="eyebrow mint" id="escort-status" aria-live="polite"></p>
+          <div id="checkpoint-copy"></div>
+          <form id="memory-form" class="mission-form">
+            <label for="memory-answer" id="memory-label">RECOVERED PHRASE</label>
+            <input id="memory-answer" autocomplete="off" placeholder="Enter what you remember…" />
+            <button class="action" type="submit" style="margin-top:16px">Secure checkpoint →</button>
+            <p class="error hidden" id="memory-error" role="alert">Signal incomplete. Keep talking with Michael and try again.</p>
+          </form>
+        </div>
+      </section>
+      <section class="card mission hidden" id="saturday-file">
+        <div class="abort" role="alert"><div class="eyebrow">TRACER // EMERGENCY DISCONNECT</div><h1>ABORT CONTACT!</h1><p><strong>End the call or conversation with Michael immediately.</strong></p><p>We have the final fragment. Cease communication now, before Moira detects the connection. Do not ask him any more questions about the mission.</p></div>
+        <div class="mission-head" style="margin-top:28px"><div><div class="eyebrow mint">FILE 02 // DECRYPTED</div><h1>Saturday preparation orders</h1></div><div class="radio">✓</div></div>
+        <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sunscreen, sunglasses, and a hat.</li><li>Pack secure shoes with good grip. Keep your water shoes handy.</li></ul></article>
+        <article class="file-intro"><h2>Fragment secured</h2><p>Follow these orders and await our next transmission. There is still more to uncover.</p></article>
+        <button class="hint-btn" id="replay-escort">Revisit the memory escort</button>
       </section>
     </div>
   </main>
 
   <script>
     const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
-    const unlockAt = new Date("2026-09-21T07:00:00-05:00").getTime();
+    const unlockAt = 0; // Mission Two released for the playable escort.
     const dialogue = [
   [
     "JUNO",
@@ -161,10 +190,10 @@
     const login=document.getElementById("login-screen"), mission=document.getElementById("mission-screen");
     const missionOne=document.getElementById("mission-one"), equipment=document.getElementById("equipment-file");
     function showSolved(){
-      missionOne.classList.add("hidden");equipment.classList.remove("hidden");
+      hideMissionPanels();equipment.classList.remove("hidden");
       document.getElementById("clearance").textContent="CLEARANCE 1/4";
       document.getElementById("progress").style.width="25%";
-      const stage=document.getElementById("stage-one");stage.classList.add("solved");stage.querySelector("b").textContent="✓";
+      const stage=document.getElementById("stage-one");stage.classList.add("solved");stage.querySelector("b").textContent="✓";updateClearance();
     }
     document.getElementById("auth-form").addEventListener("submit",event=>{
       event.preventDefault();
@@ -176,15 +205,100 @@
     document.getElementById("code-form").addEventListener("submit",event=>{
       event.preventDefault();
       if(normalize(document.getElementById("mission-code").value)!=="spongebob"){document.getElementById("code-error").classList.remove("hidden");return}
-      localStorage.setItem("groom-mission-1-solved","true");showSolved();window.scrollTo(0,0);
+      localStorage.setItem("groom-mission-1-solved","true");showSolved();updateCountdown();window.scrollTo(0,0);
     });
     document.getElementById("hint-btn").addEventListener("click",()=>document.getElementById("hint-text").classList.toggle("hidden"));
     function updateCountdown(){
       const remaining=unlockAt-Date.now(), root=document.getElementById("countdown"), status=document.getElementById("mission-two-status"), stage=document.getElementById("stage-two");
-      if(remaining<=0){root.textContent="TRANSMISSION WINDOW OPEN";status.textContent="WINDOW OPEN";stage.disabled=false;stage.querySelector("b").textContent="02";stage.querySelector("span").textContent="WINDOW OPEN";return}
+      if(remaining<=0){root.textContent="MEMORY ESCORT READY";status.textContent="AVAILABLE";stage.disabled=localStorage.getItem("groom-mission-1-solved")!=="true";stage.querySelector("b").textContent="02";stage.querySelector("span").textContent=stage.disabled?"AWAITING CLEARANCE":"MEMORY ESCORT";return}
       const seconds=Math.floor(remaining/1000),d=Math.floor(seconds/86400),h=Math.floor((seconds%86400)/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;
       root.textContent=[d,h,m,s].map(v=>String(v).padStart(2,"0")).join(" : ").replace(/^([^:]+):([^:]+):([^:]+):([^:]+)$/,"$1D :$2H :$3M :$4S");
     }
+
+    function hideMissionPanels(){
+      ["mission-one","equipment-file","mission-two","saturday-file"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+    }
+    let checkpoint=Math.max(0,Math.min(3,Number(localStorage.getItem("groom-escort-checkpoint"))||0));
+    let coachReady=false;
+    function acceptsMemory(index,value){
+      const clean=normalize(value);
+      return index===0 ? /^(owmynail)+$/.test(clean) : index===1 ? clean==="gata" : /^(hookah?)+$/.test(clean);
+    }
+    function updateClearance(){
+      const done=localStorage.getItem("groom-mission-2-solved")==="true";
+      document.getElementById("clearance").textContent=done?"CLEARANCE 2/4":"CLEARANCE 1/4";
+      document.getElementById("progress").style.width=done?"50%":"25%";
+      document.getElementById("stage-two").classList.toggle("solved",done);
+    }
+    function openEscort(){
+      if(localStorage.getItem("groom-mission-1-solved")!=="true")return;
+      hideMissionPanels();
+      document.getElementById("stage-one").classList.remove("active");
+      document.getElementById("stage-two").classList.add("active");
+      updateClearance();
+      if(checkpoint===3){document.getElementById("saturday-file").classList.remove("hidden");}
+      else{
+        document.getElementById("mission-two").classList.remove("hidden");
+        if(checkpoint>0)startEscort();
+      }
+      window.scrollTo(0,0);
+    }
+    function startEscort(){
+      document.getElementById("escort-brief").classList.add("hidden");
+      document.getElementById("escort-play").classList.remove("hidden");
+      renderCheckpoint();
+    }
+    function renderCheckpoint(){
+      const form=document.getElementById("memory-form");
+      document.getElementById("memory-answer").value="";
+      document.getElementById("memory-error").classList.add("hidden");
+      document.getElementById("payload-fill").style.width=(checkpoint/3*100)+"%";
+      document.getElementById("payload-cart").style.left=(checkpoint/3*100)+"%";
+      document.getElementById("escort-status").textContent=checkpoint+" / 3 CHECKPOINTS SECURED";
+      const copies=[
+        '<h2>Checkpoint 01 · Band days</h2><p>Talk with Michael about being in band at school. Compare the moments—and the people—that still make you laugh. There is a particular phrase you need to remember.</p><p>When it comes back to you, say it to Michael. Once he confirms it, enter it below.</p><details><summary>Inspect the damaged transcript</summary><p class="mono">__! __ ____</p></details>',
+        '<h2>Checkpoint 02 · Back to class</h2><p>Keep the memories going. Talk about your high school teachers: their personalities, their classes, and the things that stuck with you.</p><p>Michael will recognize when you’ve reached the right person. Wait for him to tell you to click below.</p><button type="button" class="action" id="coach-cue">Michael gave me the cue →</button>',
+        '<h2>Checkpoint 03 · Thanksgiving</h2><p>Talk with Michael about Thanksgiving memories. Let him tell his side of the story, and share what you remember too.</p><p>When he gives you the final phrase, enter it below. Be ready to end the conversation as soon as the fragment is recovered.</p>'
+      ];
+      document.getElementById("checkpoint-copy").innerHTML='<div class="memory-copy">'+copies[checkpoint]+'</div>';
+      form.classList.toggle("hidden",checkpoint===1&&!coachReady);
+      document.getElementById("memory-label").textContent=checkpoint===1?"RECOVERED ACRONYM":"RECOVERED PHRASE";
+      if(checkpoint===1){
+        document.getElementById("coach-cue").addEventListener("click",()=>{
+          coachReady=true;
+          document.getElementById("checkpoint-copy").innerHTML='<div class="memory-copy"><h2>Signal located · The coach</h2><p>What is the famous acronym of the coach’s signature phrase?</p></div>';
+          form.classList.remove("hidden");
+          document.getElementById("memory-answer").focus();
+        });
+      }
+    }
+    document.getElementById("memory-form").addEventListener("submit",event=>{
+      event.preventDefault();
+      if(checkpoint===1&&!coachReady)return;
+      if(!acceptsMemory(checkpoint,document.getElementById("memory-answer").value)){
+        document.getElementById("memory-error").classList.remove("hidden");return;
+      }
+      checkpoint++;coachReady=false;
+      localStorage.setItem("groom-escort-checkpoint",String(checkpoint));
+      if(checkpoint===3){
+        localStorage.setItem("groom-mission-2-solved","true");openEscort();
+      }else{renderCheckpoint();document.getElementById("escort-play").scrollIntoView({block:"start"});}
+    });
+    document.getElementById("begin-escort").addEventListener("click",startEscort);
+    document.getElementById("open-escort").addEventListener("click",openEscort);
+    document.getElementById("stage-two").addEventListener("click",openEscort);
+    document.getElementById("stage-one").addEventListener("click",()=>{
+      hideMissionPanels();
+      document.getElementById("stage-one").classList.add("active");
+      document.getElementById("stage-two").classList.remove("active");
+      (localStorage.getItem("groom-mission-1-solved")==="true"?equipment:missionOne).classList.remove("hidden");
+      updateClearance();window.scrollTo(0,0);
+    });
+    document.getElementById("replay-escort").addEventListener("click",()=>{
+      checkpoint=0;coachReady=false;localStorage.setItem("groom-escort-checkpoint","0");
+      openEscort();startEscort();
+    });
+
     updateCountdown();setInterval(updateCountdown,1000);
   </script>
 </body>
