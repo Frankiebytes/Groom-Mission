@@ -30,7 +30,7 @@
     @media(max-width:850px){.login{grid-template-columns:1fr;padding:40px 0}.auth{position:static}.workspace{grid-template-columns:1fr}.stages{display:grid;grid-template-columns:repeat(4,1fr)}.stage{justify-content:center}.stage span{display:none}.mission{padding:24px}header{padding:18px 20px}}
     @media(max-width:520px){.login,.workspace{width:min(100% - 28px,1180px)}.brief{padding-left:18px}.card{box-shadow:8px 8px 0 #020405,8px 8px 0 1px #152620}.mission{padding:18px}.dialogue{grid-template-columns:1fr}.dialogue .avatar{display:none}.tracer-grid{grid-template-columns:1fr}.tracer .avatar{display:none}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  .payload{margin:32px 0}.payload-track{height:12px;background:#223b34;position:relative;border-radius:8px}.payload-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .6s}.payload-track b{position:absolute;top:-12px;left:0;font-size:30px;color:var(--mint);transition:left .6s;transform:translateX(-50%)}.payload-labels{display:flex;justify-content:space-between;margin-top:16px;color:var(--dim);font-family:monospace}.abort{border:2px solid var(--red);background:#2b1010;padding:24px}.abort h1{color:var(--red);font-size:clamp(32px,6vw,56px);margin:20px 0}.abort p{line-height:1.6}.memory-copy p{line-height:1.65;color:#c4d2cf}.memory-copy h2{font-size:28px}details{margin-top:20px;color:var(--dim)}summary{cursor:pointer}.stage:not(:disabled){cursor:pointer}</style>
+  .payload{margin:32px 0}.payload-track{height:12px;background:#223b34;position:relative;border-radius:8px}.payload-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .6s}.payload-track b{position:absolute;top:-12px;left:0;font-size:30px;color:var(--mint);transition:left .6s;transform:translateX(-50%)}.payload-labels{display:flex;justify-content:space-between;margin-top:16px;color:var(--dim);font-family:monospace}.abort{border:2px solid var(--red);background:#2b1010;padding:24px}.abort h1{color:var(--red);font-size:clamp(32px,6vw,56px);margin:20px 0}.abort p{line-height:1.6}.memory-copy p{line-height:1.65;color:#c4d2cf}.memory-copy h2{font-size:28px}details{margin-top:20px;color:var(--dim)}summary{cursor:pointer}.stage:not(:disabled){cursor:pointer}.dialogue.lucio{border-left:3px solid #b0f34b}.lucio .speaker,.lucio .avatar{color:#b0f34b}.dialogue.cat{border-left:3px solid #ffcf91}.cat .speaker{color:#ffcf91}.cat p{font-style:italic}</style>
 </head>
 <body>
   <div class="scan" aria-hidden="true"></div>
@@ -73,7 +73,7 @@
       <nav class="stages" aria-label="Mission stages">
         <button class="stage active" id="stage-one"><b>01</b><span>ACTIVE INTERCEPT</span></button>
         <button class="stage" id="stage-two" disabled><b>⌕</b><span>AWAITING CLEARANCE</span></button>
-        <button class="stage" disabled><b>⌕</b><span>TRANSMISSION PENDING</span></button>
+        <button class="stage" id="stage-three" disabled><b>03</b><span>FINAL KEY</span></button>
         <button class="stage" disabled><b>⌕</b><span>FINAL DIRECTIVE</span></button>
       </nav>
 
@@ -124,7 +124,40 @@
         <div class="abort" role="alert"><div class="eyebrow">TRACER // EMERGENCY DISCONNECT</div><h1>ABORT CONTACT!</h1><p><strong>End the call or conversation with Michael immediately.</strong></p><p>We have the final fragment. Cease communication now, before Moira detects the connection. Do not ask him any more questions about the mission.</p></div>
         <div class="mission-head" style="margin-top:28px"><div><div class="eyebrow mint">FILE 02 // DECRYPTED</div><h1>Saturday preparation orders</h1></div><div class="radio">✓</div></div>
         <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sunscreen, sunglasses, and a hat.</li><li>Pack secure shoes with good grip. Keep your water shoes handy.</li></ul></article>
-        <article class="tracer" id="lucio-update" style="border-color:#b0f34b;background:linear-gradient(135deg,rgba(176,243,75,.12),transparent 65%),#101709"><div class="tracer-grid"><div class="avatar" style="color:#b0f34b">L</div><div><div class="speaker" style="color:#b0f34b">LÚCIO // NEXT MISSION UPDATE</div><h2 style="color:#b0f34b">We’re making great progress!</h2><p>Yo, Raul! You and Michael were in sync! Another fragment secured—that’s what happens when you show up for your people.</p><p>We’re getting closer, but the team’s still working on the next signal. Your next mission will be available <strong>Wednesday, September 23 at 7:00 AM Central Time</strong>. Report back here, ready to keep this moving!</p><p>Until then, take a breather and keep it quiet. We’ll turn up the volume when your friends are safe.</p></div></div><div class="countbox" style="border-color:#40562a"><div class="eyebrow" style="color:#b0f34b">◷ MISSION 03 // <span id="mission-three-status">LOCKED</span></div><p><strong>Wednesday, September 23 · 7:00 AM Central</strong></p><div class="countdown" id="mission-three-countdown" style="color:#b0f34b"></div></div></article>
+        <article class="tracer" id="lucio-update" style="border-color:#b0f34b"><div class="speaker" style="color:#b0f34b">LÚCIO // NEXT MISSION READY</div><h2>We’re breaking through!</h2><p>Yo, Raul! Another fragment secured, and Moira’s hold is weakening. Fika and I have picked up a lead on the final key. Meet us on the next channel!</p><button class="action" id="open-moco">Open Mission 03 →</button></article>
+      </section>
+
+      <section class="card mission hidden" id="mission-three">
+        <div class="mission-head"><div><div class="eyebrow mint">STAGE 03 // BREAK THE HOLD</div><h1>One final key</h1></div><div class="radio">♫</div></div>
+        <article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>Raul! Now we’re getting somewhere. Every fragment you’ve recovered has weakened Moira’s hold. Winston’s seeing her control slip across the whole team. Your friends are fighting back—and you gave them the opening.</p></div></article>
+<article class="dialogue cat"><div class="avatar">F</div><div><div class="speaker">FIKA // JETPACK CAT</div><p>[An excited chirp. Her jetpack lifts her onto the communications desk.]</p></div></article>
+<article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>Yeah, that deserves a little celebration. Little, Fika. Keep your paws off the volume slider.</p></div></article>
+<article class="dialogue cat"><div class="avatar">F</div><div><div class="speaker">FIKA // JETPACK CAT</div><p>[Slowly pushes the volume slider higher.]</p></div></article>
+<article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>We’re close, but there’s one lock left. Moco has the final key buried under Moira’s conditioning. Recover his phrase, bring it here, and we can break her hold on all your groomsmen. This is the big one.</p></div></article>
+<article class="dialogue cat"><div class="avatar">F</div><div><div class="speaker">FIKA // JETPACK CAT</div><p>Mrrp! [Squares up beside the microphone.]</p></div></article>
+<article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>That’s our backup. Very small. Very confident. Catch Moco at Life Time after his shift, either in person or with a phone call. Wait until he’s off the clock and can hear you clearly. Keep it casual—we don’t want Moira noticing us this close to the finish.</p></div></article>
+<article class="dialogue cat"><div class="avatar">F</div><div><div class="speaker">FIKA // JETPACK CAT</div><p>[Ears perk up as a phrase appears on the monitor.]</p></div></article>
+<article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>The disruption phrase is “Banana Bread.” Say those words to Moco. They’ll interrupt Moira’s control just long enough for him to share the response we need.</p></div></article>
+<article class="dialogue cat"><div class="avatar">F</div><div><div class="speaker">FIKA // JETPACK CAT</div><p>[Inspects the desk. Looks deeply disappointed by the absence of bread.]</p></div></article>
+<article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>It’s a code, Fika. We’ll sort out snacks after the rescue. Raul, listen carefully to what Moco says back. That response is your key. Enter it below, and we’ll send the release signal.</p></div></article>
+<article class="dialogue cat"><div class="avatar">F</div><div><div class="speaker">FIKA // JETPACK CAT</div><p>[One determined meow. A paw lands beside the transmit button.]</p></div></article>
+<article class="dialogue lucio"><div class="avatar">L</div><div><div class="speaker">LÚCIO</div><p>You’ve shown up for your people every step of the way. One more connection. One more phrase. Let’s bring the whole crew back.</p></div></article>
+        <article class="phrase"><div class="eyebrow dim">NEURAL DISRUPTION PHRASE</div><blockquote>Banana Bread</blockquote></article>
+        <article class="file-intro"><h2>Your objective</h2><p>Reach Moco at Life Time after his shift—in person or by phone. Say the disruption phrase, listen to his response, and enter the phrase he shares below.</p></article>
+        <form id="moco-form" class="mission-form">
+          <label for="moco-answer">MOCO’S RECOVERED PHRASE</label>
+          <input id="moco-answer" autocomplete="off" placeholder="Enter Moco’s response…" aria-describedby="moco-help" />
+          <p class="dim" id="moco-help">Capitalization, spacing, and punctuation don’t matter.</p>
+          <button class="action" type="submit">Transmit the final key →</button>
+          <p class="error hidden" id="moco-error" role="alert">The key didn’t match. Think back to Moco’s response and try again.</p>
+        </form>
+      </section>
+      <section class="card mission hidden" id="sunday-file">
+        <div class="mission-head"><div><div class="eyebrow mint">RELEASE SIGNAL CONFIRMED</div><h1>Your team is free</h1></div><div class="radio">✓</div></div>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // OVERWATCH HQ</div><p>Raul, the signal worked! Moira’s conditioning has collapsed. All of your groomsmen are free.</p><p>You reached them through the very thing she underestimated: their connection to you. On behalf of everyone here at Overwatch—well done. You brought your friends back.</p></div></article>
+        <article class="equipment priority"><div class="dayline"><span>FILE 03 // SUNDAY</span></div><h2>Your final packing instructions</h2><ul><li>Have comfortable, casual clothing ready for Sunday.</li></ul></article>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // NEXT DIRECTIVE</div><p>But our work isn’t finished. Moira tried to turn your friends against you. Now that they’re safe, it’s time for us to strike back.</p><p>We’re reviewing the intelligence you recovered and preparing our approach. Stay tuned to this channel for further updates. Until we have a plan, hold position—and enjoy knowing your team is on your side again.</p></div></article>
+        <article class="critical"><div class="eyebrow mint">MISSION 04 // AWAIT FURTHER INSTRUCTIONS</div><p>The rescue is complete. The counterattack is next.</p></article>
       </section>
     </div>
   </main>
@@ -219,7 +252,8 @@
     }
 
     function hideMissionPanels(){
-      ["mission-one","equipment-file","mission-two","saturday-file"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+      document.getElementById("stage-three").classList.remove("active");
+      ["mission-one","equipment-file","mission-two","saturday-file","mission-three","sunday-file"].forEach(id=>document.getElementById(id).classList.add("hidden"));
     }
     let checkpoint=localStorage.getItem("groom-mission-2-solved")==="true" ? 3 : Math.max(0,Math.min(3,Number(localStorage.getItem("groom-escort-checkpoint"))||0));
     let coachReady=false;
@@ -229,9 +263,12 @@
     }
     function updateClearance(){
       const done=localStorage.getItem("groom-mission-2-solved")==="true";
-      document.getElementById("clearance").textContent=done?"CLEARANCE 2/4":"CLEARANCE 1/4";
-      document.getElementById("progress").style.width=done?"50%":"25%";
+      const doneThree=localStorage.getItem("groom-mission-3-solved")==="true";
+      document.getElementById("clearance").textContent=doneThree?"CLEARANCE 3/4":done?"CLEARANCE 2/4":"CLEARANCE 1/4";
+      document.getElementById("progress").style.width=doneThree?"75%":done?"50%":"25%";
       document.getElementById("stage-two").classList.toggle("solved",done);
+      document.getElementById("stage-three").classList.toggle("solved",doneThree);
+      document.getElementById("stage-three").disabled=!done;
     }
     function openEscort(){
       if(localStorage.getItem("groom-mission-2-solved")==="true")checkpoint=3;
@@ -300,14 +337,30 @@
       updateClearance();window.scrollTo(0,0);
     });
 
-    function updateNextTransmission(){
-      const remaining=new Date("2026-09-23T07:00:00-05:00").getTime()-Date.now();
-      const root=document.getElementById("mission-three-countdown");
-      if(remaining<=0){root.textContent="REPORT BACK TO MISSION CONTROL";document.getElementById("mission-three-status").textContent="TRANSMISSION WINDOW OPEN";return;}
-      const seconds=Math.floor(remaining/1000);
-      root.textContent=Math.floor(seconds/86400)+"D : "+String(Math.floor(seconds%86400/3600)).padStart(2,"0")+"H : "+String(Math.floor(seconds%3600/60)).padStart(2,"0")+"M : "+String(seconds%60).padStart(2,"0")+"S";
+
+    function acceptsMoco(value){
+      return /^(?:good|gud|g)(?:night|nite|nyt)(?:yall|yal|yaall|youall)$/.test(normalize(value));
     }
-    updateNextTransmission();setInterval(updateNextTransmission,1000);
+    function openMoco(){
+      if(localStorage.getItem("groom-mission-2-solved")!=="true")return;
+      hideMissionPanels();
+      ["stage-one","stage-two"].forEach(id=>document.getElementById(id).classList.remove("active"));
+      document.getElementById("stage-three").classList.add("active");
+      const solved=localStorage.getItem("groom-mission-3-solved")==="true";
+      document.getElementById(solved?"sunday-file":"mission-three").classList.remove("hidden");
+      updateClearance();window.scrollTo(0,0);
+    }
+    document.getElementById("stage-three").addEventListener("click",openMoco);
+    document.getElementById("open-moco").addEventListener("click",openMoco);
+    document.getElementById("moco-form").addEventListener("submit",event=>{
+      event.preventDefault();
+      if(localStorage.getItem("groom-mission-2-solved")!=="true")return;
+      if(!acceptsMoco(document.getElementById("moco-answer").value)){
+        document.getElementById("moco-error").classList.remove("hidden");return;
+      }
+      document.getElementById("moco-error").classList.add("hidden");
+      localStorage.setItem("groom-mission-3-solved","true");openMoco();
+    });
     updateCountdown();setInterval(updateCountdown,1000);
   </script>
 </body>
