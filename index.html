@@ -124,7 +124,7 @@
         <div class="abort" role="alert"><div class="eyebrow">TRACER // EMERGENCY DISCONNECT</div><h1>ABORT CONTACT!</h1><p><strong>End the call or conversation with Michael immediately.</strong></p><p>We have the final fragment. Cease communication now, before Moira detects the connection. Do not ask him any more questions about the mission.</p></div>
         <div class="mission-head" style="margin-top:28px"><div><div class="eyebrow mint">FILE 02 // DECRYPTED</div><h1>Saturday preparation orders</h1></div><div class="radio">✓</div></div>
         <article class="equipment"><div class="dayline"><span>SATURDAY</span></div><h2>Outdoor loadout</h2><ul><li>Wear comfortable, breathable outdoor clothing.</li><li>Bring sunscreen, sunglasses, and a hat.</li><li>Pack secure shoes with good grip. Keep your water shoes handy.</li></ul></article>
-        <article class="tracer" id="lucio-update" style="border-color:#b0f34b"><div class="speaker" style="color:#b0f34b">LÚCIO // NEXT MISSION READY</div><h2>We’re breaking through!</h2><p>Yo, Raul! Another fragment secured, and Moira’s hold is weakening. Fika and I have picked up a lead on the final key. Meet us on the next channel!</p><button class="action" id="open-moco">Open Mission 03 →</button></article>
+        <article class="tracer" id="lucio-update" style="border-color:#b0f34b"><div class="speaker" style="color:#b0f34b">LÚCIO // NEXT TRANSMISSION</div><h2>We’re breaking through!</h2><p>Yo, Raul! Another fragment secured, and Moira’s hold is weakening. Fika and I are tracking the next signal. Catch your breath and report back <strong>Wednesday, September 23 at 7:00 AM Central Time</strong>. We’ll be ready to keep this moving!</p><div class="countbox"><div class="eyebrow mint" id="moco-release-status">MISSION 03 // LOCKED</div><p class="countdown" id="moco-countdown"></p><button class="action hidden" id="open-moco" disabled>Open Mission 03 →</button></div></article>
       </section>
 
       <section class="card mission hidden" id="mission-three">
@@ -164,6 +164,7 @@
 
   <script>
     const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
+    const missionThreeUnlockAt = new Date("2026-09-23T07:00:00-05:00").getTime();
     const unlockAt = 0; // Mission 2 available for the walkthrough; no time lock.
     const dialogue = [
   [
@@ -268,7 +269,7 @@
       document.getElementById("progress").style.width=doneThree?"75%":done?"50%":"25%";
       document.getElementById("stage-two").classList.toggle("solved",done);
       document.getElementById("stage-three").classList.toggle("solved",doneThree);
-      document.getElementById("stage-three").disabled=!done;
+      document.getElementById("stage-three").disabled=!done || Date.now()<missionThreeUnlockAt;
     }
     function openEscort(){
       if(localStorage.getItem("groom-mission-2-solved")==="true")checkpoint=3;
@@ -342,7 +343,7 @@
       return /^(?:good|gud|g)(?:night|nite|nyt)(?:yall|yal|yaall|youall)$/.test(normalize(value));
     }
     function openMoco(){
-      if(localStorage.getItem("groom-mission-2-solved")!=="true")return;
+      if(Date.now()<missionThreeUnlockAt || localStorage.getItem("groom-mission-2-solved")!=="true")return;
       hideMissionPanels();
       ["stage-one","stage-two"].forEach(id=>document.getElementById(id).classList.remove("active"));
       document.getElementById("stage-three").classList.add("active");
@@ -354,13 +355,26 @@
     document.getElementById("open-moco").addEventListener("click",openMoco);
     document.getElementById("moco-form").addEventListener("submit",event=>{
       event.preventDefault();
-      if(localStorage.getItem("groom-mission-2-solved")!=="true")return;
+      if(Date.now()<missionThreeUnlockAt || localStorage.getItem("groom-mission-2-solved")!=="true")return;
       if(!acceptsMoco(document.getElementById("moco-answer").value)){
         document.getElementById("moco-error").classList.remove("hidden");return;
       }
       document.getElementById("moco-error").classList.add("hidden");
       localStorage.setItem("groom-mission-3-solved","true");openMoco();
     });
+
+    function updateMissionThreeRelease(){
+      const remaining=missionThreeUnlockAt-Date.now();
+      const ready=remaining<=0, complete=localStorage.getItem("groom-mission-2-solved")==="true";
+      const button=document.getElementById("open-moco"),stage=document.getElementById("stage-three");
+      button.disabled=!ready||!complete;button.classList.toggle("hidden",!ready);
+      stage.disabled=!ready||!complete;
+      stage.querySelector("span").textContent=ready?"FINAL KEY":"UNLOCKS SEP 23";
+      document.getElementById("moco-release-status").textContent=ready?"MISSION 03 // AVAILABLE":"MISSION 03 // LOCKED";
+      const seconds=Math.max(0,Math.ceil(remaining/1000));
+      document.getElementById("moco-countdown").textContent=ready?"TRANSMISSION READY":Math.floor(seconds/86400)+"D : "+String(Math.floor(seconds%86400/3600)).padStart(2,"0")+"H : "+String(Math.floor(seconds%3600/60)).padStart(2,"0")+"M : "+String(seconds%60).padStart(2,"0")+"S";
+    }
+    updateMissionThreeRelease();setInterval(updateMissionThreeRelease,1000);
     updateCountdown();setInterval(updateCountdown,1000);
   </script>
 </body>
