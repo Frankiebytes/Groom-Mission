@@ -391,7 +391,7 @@
     document.getElementById("final-form").addEventListener("submit",event=>{
       event.preventDefault();
       if(localStorage.getItem("groom-mission-3-solved")!=="true")return;
-      const valid=normalize(document.getElementById("final-answer").value)==="theworldneedsyou";
+      const valid=normalize(document.getElementById("final-answer").value)==="family";
       document.getElementById("final-error").classList.toggle("hidden",valid);
       document.getElementById("final-transmission").classList.toggle("hidden",!valid);
       if(valid)document.getElementById("final-transmission").scrollIntoView({block:"center"});
