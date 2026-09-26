@@ -156,8 +156,15 @@
         <div class="mission-head"><div><div class="eyebrow mint">RELEASE SIGNAL CONFIRMED</div><h1>Your team is free</h1></div><div class="radio">✓</div></div>
         <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // OVERWATCH HQ</div><p>Raul, the signal worked! Moira’s conditioning has collapsed. All of your groomsmen are free.</p><p>You reached them through the very thing she underestimated: their connection to you. On behalf of everyone here at Overwatch—well done. You brought your friends back.</p></div></article>
         <article class="equipment priority"><div class="dayline"><span>FILE 03 // SUNDAY</span></div><h2>Your final packing instructions</h2><ul><li>Have comfortable, casual clothing ready for Sunday.</li></ul></article>
-        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // NEXT DIRECTIVE</div><p>But our work isn’t finished. Moira tried to turn your friends against you. Now that they’re safe, it’s time for us to strike back.</p><p>We’re reviewing the intelligence you recovered and preparing our approach. Stay tuned to this channel for further updates. Until we have a plan, hold position—and enjoy knowing your team is on your side again.</p></div></article>
-        <article class="critical"><div class="eyebrow mint">MISSION 04 // AWAIT FURTHER INSTRUCTIONS</div><p>The rescue is complete. The counterattack is next.</p></article>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // NEXT DIRECTIVE</div><p>But our work isn’t finished. Moira tried to turn your friends against you. Now that they’re safe, it’s time for us to strike back.</p><p>Our preparations are complete. We’re ready for the counterattack. Your team has arranged a special delivery carrying the next access phrase. Proceed to the secure channel when you’re ready.</p></div></article>
+        <article class="critical"><div class="eyebrow mint">MISSION 04 // COUNTERATTACK READY</div><p>Your team is free. Now it’s time to make our next move.</p><button class="action" id="open-counterattack">Proceed to the secure channel →</button></article>
+      </section>
+
+      <section class="card mission hidden" id="mission-four">
+        <div class="mission-head"><div><div class="eyebrow mint">STAGE 04 // SECURE TRANSMISSION</div><h1>The counterattack</h1></div><div class="radio">⌁</div></div>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // OVERWATCH HQ</div><p>Raul, your friends are safe, and we’re ready to strike back. Moira believed she could destroy the connections between you. Your team has prepared a response of its own.</p><p>Enter the access phrase you were given with your special delivery. What comes next is intended for you alone.</p><p><strong>Do not eat the cake yet.</strong> First enter the phrase and watch the transmission waiting for you in full. Then follow the instructions it contains. I know waiting is difficult. Believe me—I understand the temptation.</p></div></article>
+        <form class="mission-form" id="final-form"><label for="final-answer">DELIVERY ACCESS PHRASE</label><input id="final-answer" autocomplete="off" placeholder="Enter the phrase from your note…" /><p class="dim">Capitalization, spacing, and punctuation don’t matter.</p><button class="action" type="submit">Unlock transmission →</button><p class="error hidden" id="final-error" role="alert">Phrase not recognized. Check the note and try again.</p></form>
+        <article class="file-intro hidden" id="final-transmission" aria-live="polite"><h2>Phrase verified · Awaiting transmission</h2><p>Your team’s message is still on its way. Keep the cake untouched and return to this channel when the transmission is ready.</p></article>
       </section>
     </div>
   </main>
@@ -254,7 +261,7 @@
 
     function hideMissionPanels(){
       document.getElementById("stage-three").classList.remove("active");
-      ["mission-one","equipment-file","mission-two","saturday-file","mission-three","sunday-file"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+      ["mission-one","equipment-file","mission-two","saturday-file","mission-three","sunday-file","mission-four"].forEach(id=>document.getElementById(id).classList.add("hidden"));
     }
     let checkpoint=localStorage.getItem("groom-mission-2-solved")==="true" ? 3 : Math.max(0,Math.min(3,Number(localStorage.getItem("groom-escort-checkpoint"))||0));
     let coachReady=false;
@@ -374,6 +381,21 @@
       const seconds=Math.max(0,Math.ceil(remaining/1000));
       document.getElementById("moco-countdown").textContent=ready?"TRANSMISSION READY":Math.floor(seconds/86400)+"D : "+String(Math.floor(seconds%86400/3600)).padStart(2,"0")+"H : "+String(Math.floor(seconds%3600/60)).padStart(2,"0")+"M : "+String(seconds%60).padStart(2,"0")+"S";
     }
+
+    document.getElementById("open-counterattack").addEventListener("click",()=>{
+      if(localStorage.getItem("groom-mission-3-solved")!=="true")return;
+      hideMissionPanels();
+      ["stage-one","stage-two","stage-three"].forEach(id=>document.getElementById(id).classList.remove("active"));
+      document.getElementById("mission-four").classList.remove("hidden");window.scrollTo(0,0);
+    });
+    document.getElementById("final-form").addEventListener("submit",event=>{
+      event.preventDefault();
+      if(localStorage.getItem("groom-mission-3-solved")!=="true")return;
+      const valid=normalize(document.getElementById("final-answer").value)==="theworldneedsyou";
+      document.getElementById("final-error").classList.toggle("hidden",valid);
+      document.getElementById("final-transmission").classList.toggle("hidden",!valid);
+      if(valid)document.getElementById("final-transmission").scrollIntoView({block:"center"});
+    });
     updateMissionThreeRelease();setInterval(updateMissionThreeRelease,1000);
     updateCountdown();setInterval(updateCountdown,1000);
   </script>
