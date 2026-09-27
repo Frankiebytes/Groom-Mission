@@ -30,7 +30,7 @@
     @media(max-width:850px){.login{grid-template-columns:1fr;padding:40px 0}.auth{position:static}.workspace{grid-template-columns:1fr}.stages{display:grid;grid-template-columns:repeat(4,1fr)}.stage{justify-content:center}.stage span{display:none}.mission{padding:24px}header{padding:18px 20px}}
     @media(max-width:520px){.login,.workspace{width:min(100% - 28px,1180px)}.brief{padding-left:18px}.card{box-shadow:8px 8px 0 #020405,8px 8px 0 1px #152620}.mission{padding:18px}.dialogue{grid-template-columns:1fr}.dialogue .avatar{display:none}.tracer-grid{grid-template-columns:1fr}.tracer .avatar{display:none}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  .payload{margin:32px 0}.payload-track{height:12px;background:#223b34;position:relative;border-radius:8px}.payload-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .6s}.payload-track b{position:absolute;top:-12px;left:0;font-size:30px;color:var(--mint);transition:left .6s;transform:translateX(-50%)}.payload-labels{display:flex;justify-content:space-between;margin-top:16px;color:var(--dim);font-family:monospace}.abort{border:2px solid var(--red);background:#2b1010;padding:24px}.abort h1{color:var(--red);font-size:clamp(32px,6vw,56px);margin:20px 0}.abort p{line-height:1.6}.memory-copy p{line-height:1.65;color:#c4d2cf}.memory-copy h2{font-size:28px}details{margin-top:20px;color:var(--dim)}summary{cursor:pointer}.stage:not(:disabled){cursor:pointer}.dialogue.lucio{border-left:3px solid #b0f34b}.lucio .speaker,.lucio .avatar{color:#b0f34b}.dialogue.cat{border-left:3px solid #ffcf91}.cat .speaker{color:#ffcf91}.cat p{font-style:italic}.birthday-video{aspect-ratio:16/9;margin-top:24px;background:#000}.birthday-video iframe{width:100%;height:100%;border:0}.timed-message[hidden]{display:none!important}.timed-message:not([hidden]){animation:message-arrive .8s ease-out}.domina{border-left:3px solid #d4a6ff}.domina .speaker{color:#d4a6ff}@keyframes message-arrive{from{opacity:0}to{opacity:1}}@media(prefers-reduced-motion:reduce){.timed-message:not([hidden]){animation:none}}</style>
+  .payload{margin:32px 0}.payload-track{height:12px;background:#223b34;position:relative;border-radius:8px}.payload-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .6s}.payload-track b{position:absolute;top:-12px;left:0;font-size:30px;color:var(--mint);transition:left .6s;transform:translateX(-50%)}.payload-labels{display:flex;justify-content:space-between;margin-top:16px;color:var(--dim);font-family:monospace}.abort{border:2px solid var(--red);background:#2b1010;padding:24px}.abort h1{color:var(--red);font-size:clamp(32px,6vw,56px);margin:20px 0}.abort p{line-height:1.6}.memory-copy p{line-height:1.65;color:#c4d2cf}.memory-copy h2{font-size:28px}details{margin-top:20px;color:var(--dim)}summary{cursor:pointer}.stage:not(:disabled){cursor:pointer}.dialogue.lucio{border-left:3px solid #b0f34b}.lucio .speaker,.lucio .avatar{color:#b0f34b}.dialogue.cat{border-left:3px solid #ffcf91}.cat .speaker{color:#ffcf91}.cat p{font-style:italic}.birthday-video{aspect-ratio:16/9;margin-top:24px;background:#000}.birthday-video iframe{width:100%;height:100%;border:0}.timed-message[hidden]{display:none!important}.timed-message:not([hidden]){animation:message-arrive .8s ease-out}.domina{border-left:3px solid #d4a6ff}.domina .speaker{color:#d4a6ff}@keyframes message-arrive{from{opacity:0}to{opacity:1}}@media(prefers-reduced-motion:reduce){.timed-message:not([hidden]){animation:none}}.victory{background:radial-gradient(ellipse at top right,rgba(98,245,197,.14),transparent 55%),var(--panel)}.final-orders{margin:28px 0;padding:24px;border:2px solid var(--orange);background:#211909}.final-orders h2{font-size:clamp(25px,4vw,36px);color:var(--orange)}.final-orders p{line-height:1.6}.final-orders blockquote{font-size:clamp(24px,4vw,36px);font-weight:bold;margin:24px 0;color:var(--mint)}</style>
 </head>
 <body>
   <div class="scan" aria-hidden="true"></div>
@@ -169,10 +169,24 @@
 
       <section class="card mission hidden" id="final-transmission">
         <div class="eyebrow mint">OVERWATCH HQ // PERSONAL TRANSMISSION</div>
-        <article class="dialogue wuyang timed-message" id="birthday-message" hidden aria-live="polite"><div class="avatar">W</div><div><div class="speaker">WINSTON</div><p>Raul, we received word that your birthday passed this year without a proper celebration. Well… that simply won’t do. Even heroes deserve a moment when everyone shows up for them.</p><p>From all your groomsmen and your fellow Overwatch team: <strong>happy late birthday!</strong> And, most importantly, we wish you a joyful, prosperous marriage—a lifetime of laughter, discovery, and facing whatever comes next together.</p><p>You’ve spent this operation bringing your friends back. Now, I believe they have something they’d like to say to you.</p></div></article>
+        <article class="dialogue wuyang timed-message" id="birthday-message" aria-live="polite"><div class="avatar">W</div><div><div class="speaker">WINSTON</div><p>Raul, we received word that your birthday passed this year without a proper celebration. Well… that simply won’t do. Even heroes deserve a moment when everyone shows up for them.</p><p>From all your groomsmen and your fellow Overwatch team: <strong>happy late birthday!</strong> And, most importantly, we wish you a joyful, prosperous marriage—a lifetime of laughter, discovery, and facing whatever comes next together.</p></div></article>
         <div class="birthday-video"><iframe id="birthday-video" title="A personal message for Raul" data-src="https://www.youtube-nocookie.com/embed/AVGed7OXGTE?playsinline=1&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <p><a class="mint" href="https://www.youtube.com/watch?v=AVGed7OXGTE" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></p>
-        <article class="dialogue timed-message domina" id="cake-message" hidden aria-live="polite"><div class="avatar">D</div><div><div class="speaker">DOMINA // VISHKAR</div><p>Darling, your cake is Vishkar’s finest creation. Naturally, we saved it for someone worth celebrating. Go on—enjoy it. Excellence is best appreciated one bite at a time.</p></div></article>
+        <article class="dialogue timed-message domina" id="cake-message" hidden aria-live="polite"><div class="avatar">D</div><div><div class="speaker">DOMINA // VISHKAR</div><p>Darling, your cake is Vishkar’s finest creation. Naturally, we saved it for someone worth celebrating. Go on—enjoy it. Excellence is best appreciated one bite at a time. And happy late birthday, darling. A celebration worthy of you was never optional.</p></div></article>
+        <button class="action hidden" id="cast-ultimate" style="margin-top:24px">Cast your ultimate on moira!</button>
+      </section>
+
+      <section class="card mission hidden victory" id="mission-complete">
+        <div class="eyebrow mint">ULTIMATE DEPLOYED // MOIRA DEFEATED</div>
+        <h1>Victory.<br>Your team is together.</h1>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON // OVERWATCH HQ</div><p>Raul… we did it. Moira’s operation is finished. Your groomsmen are safe, her control is broken, and the intelligence you recovered made our counterattack possible.</p><p>But what I’ll remember most isn’t the final strike. It’s that you kept showing up for your friends. You listened. You remembered. You trusted them. Those are the things Moira could never understand—and the things she could never take from you.</p></div></article>
+        <article class="dialogue juno"><div class="avatar">T</div><div><div class="speaker">TRACER</div><p>You were brilliant, Raul! And now comes the part we’ve all been waiting for: you get to enjoy your bachelor party weekend with your groomsmen.</p><p>You’re in for a great surprise. I’d love to give you a little hint, but we’ve been given very strict instructions. No details. Not even one. You have no idea how difficult this is for me!</p></div></article>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON</div><p>You now have all your packing instructions. Review the recovered files, get everything ready, and let your team take care of what comes next. There is just one final task, and it is essential to bringing everyone together.</p></div></article>
+        <article class="final-orders"><div class="eyebrow">FINAL TASK // DO NOT MISS THIS</div><h2>Friday, October 2<br>2:30 PM Central Time</h2><p><strong>Set a reminder on your phone now.</strong> Be fully ready and packed by 2:30 p.m.</p><p>At exactly <strong>2:30 p.m.</strong>, once you are ready and packed, text your best man these exact words:</p><blockquote>Assemble the team</blockquote><p><strong>Then expect a phone call.</strong> Keep your phone nearby, with the ringer on, and be ready to answer. This message is your team’s signal—please don’t forget it.</p></article>
+        <article class="dialogue juno"><div class="avatar">T</div><div><div class="speaker">TRACER</div><p>Reminder set? Good. That’s the last bit of mission business. After that, be there for all of it—the laughs, the stories, the ridiculous moments that’ll get brought up for years.</p><p>You don’t have to figure out the surprise. You don’t have to make the weekend perfect. Just show up as yourself. That’s who they planned it for.</p></div></article>
+        <article class="dialogue wuyang"><div class="avatar">W</div><div><div class="speaker">WINSTON</div><p>Ahead of you is a new chapter: a marriage, a shared future, and so much still to discover. Before you take that step, your friends want to stand beside you and celebrate the person you are.</p><p>Let yourself feel that, Raul. You are loved. You are worth celebrating. And you don’t have to earn either of those things by completing another mission.</p><p>Enjoy every minute with your groomsmen. Take the photos. Tell the stories. Make room for the unexpected. Years from now, I hope you remember not just what you did this weekend, but how it felt to have your people around you.</p></div></article>
+        <article class="dialogue juno"><div class="avatar">T</div><div><div class="speaker">TRACER</div><p>From all of us at Overwatch: happy late birthday, congratulations on your marriage, and have an absolutely brilliant weekend. Your team’s got it from here!</p></div></article>
+        <div class="critical"><div class="eyebrow mint">MISSION COMPLETE // 4 OF 4</div><p>You answered the call. Now let your friends answer yours.</p></div>
       </section>
     </div>
   </main>
@@ -270,7 +284,7 @@
     function hideMissionPanels(){
       stopCelebration();
       document.getElementById("stage-three").classList.remove("active");
-      ["mission-one","equipment-file","mission-two","saturday-file","mission-three","sunday-file","mission-four","final-transmission"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+      ["mission-one","equipment-file","mission-two","saturday-file","mission-three","sunday-file","mission-four","final-transmission","mission-complete"].forEach(id=>document.getElementById(id).classList.add("hidden"));
     }
     let checkpoint=localStorage.getItem("groom-mission-2-solved")==="true" ? 3 : Math.max(0,Math.min(3,Number(localStorage.getItem("groom-escort-checkpoint"))||0));
     let coachReady=false;
@@ -399,23 +413,33 @@
     });
 
     let celebrationTimers=[];
+    let ultimateReady=false;
     function stopCelebration(){
       celebrationTimers.forEach(clearTimeout);celebrationTimers=[];
       document.getElementById("birthday-video").removeAttribute("src");
     }
     function showCelebration(){
       hideMissionPanels();
-      document.getElementById("birthday-message").hidden=true;
+      document.getElementById("birthday-message").hidden=false;
+      ultimateReady=false;
+      document.getElementById("cast-ultimate").classList.add("hidden");
       document.getElementById("cake-message").hidden=true;
       document.getElementById("final-transmission").classList.remove("hidden");
       const video=document.getElementById("birthday-video");
       video.src=video.getAttribute("data-src");
       window.scrollTo(0,0);
       celebrationTimers=[
-        setTimeout(()=>{document.getElementById("birthday-message").hidden=false;},15000),
-        setTimeout(()=>{document.getElementById("cake-message").hidden=false;},180000)
+        setTimeout(()=>{document.getElementById("cake-message").hidden=false;document.getElementById("cast-ultimate").classList.remove("hidden");ultimateReady=true;},180000)
       ];
     }
+    document.getElementById("cast-ultimate").addEventListener("click",()=>{
+      if(!ultimateReady)return;
+      hideMissionPanels();
+      document.getElementById("mission-complete").classList.remove("hidden");
+      document.getElementById("clearance").textContent="CLEARANCE 4/4";
+      document.getElementById("progress").style.width="100%";
+      window.scrollTo(0,0);
+    });
     document.getElementById("final-form").addEventListener("submit",event=>{
       event.preventDefault();
       if(localStorage.getItem("groom-mission-3-solved")!=="true")return;
